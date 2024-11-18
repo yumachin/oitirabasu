@@ -24,7 +24,7 @@ export default function Header() {
     // .then(): 非同期処理(セッション情報を取得が非同期)が成功したときの挙動
     // getSession()の結果には、dataオブジェクトの中にsessionプロパティが含まれており、これには現在のセッション情報が格納
     supabase.auth.getSession().then(({ data: { session } }) => {
-      console.log("components/Header.tsxのdataは", data);
+      console.log("components/Header.tsxのsessionは", session);
       setSession(session);
     });
 
