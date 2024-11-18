@@ -4,6 +4,6 @@ export default function useSignOut () {
   async function signOut() {
     // session終了
     await supabase.auth.signOut();
-  }
-  return signOut
+  };
+  return signOut;
 };

@@ -1,6 +1,8 @@
 // npm i zod
 import { z } from "zod";
 
+// string(): name, email, passwordが文字列型と期待
+// name, email, passwordはregisterで登録したキー名
 export const signUpSchema = z.object({
   name: z.string().min(1, "名前は必須です。"),
   email: z.string().min(1, "メールアドレスは必須です。").email("正しいメールアドレスで入力してください。"),

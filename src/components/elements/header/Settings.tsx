@@ -1,6 +1,7 @@
-import { Button } from "@/components/ui/button"
-import { User } from 'lucide-react'
-import Link from "next/link"
+import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
+import { User } from 'lucide-react';
 
 const Settings = () => {
   return (
@@ -13,7 +14,7 @@ const Settings = () => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Settings
+export default Settings;

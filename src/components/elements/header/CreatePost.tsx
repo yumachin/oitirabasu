@@ -1,21 +1,22 @@
-'use client'
+'use client';
 
-import { Button } from "@/components/ui/button"
-import { PlusCircle } from 'lucide-react'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { FormEvent, useState } from "react"
+import { FormEvent, useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { PlusCircle } from 'lucide-react';
 
 const CreatePost = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSubmit = (event: FormEvent) => {
-    event.preventDefault()
-    console.log('押されたよ！')
-    setIsOpen(false)
-  }
+    event.preventDefault();
+    console.log('押されたよ！');
+    setIsOpen(false);
+  };
 
   return (
     <div>
@@ -49,7 +50,7 @@ const CreatePost = () => {
         </DialogContent>
       </Dialog>
     </div>
-  )
-}
+  );
+};
 
-export default CreatePost
+export default CreatePost;

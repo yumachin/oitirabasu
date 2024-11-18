@@ -1,6 +1,7 @@
-import { Button } from '@/components/ui/button'
-import { LogIn } from 'lucide-react'
-import Link from 'next/link'
+import Link from 'next/link';
+
+import { Button } from '@/components/ui/button';
+import { LogIn } from 'lucide-react';
 
 const SignIn = () => {
   return (
@@ -13,7 +14,7 @@ const SignIn = () => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;

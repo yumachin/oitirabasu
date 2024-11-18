@@ -1,5 +1,6 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from 'next/link';
+
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { IoMdStar } from "react-icons/io";
 import { IoStarOutline } from "react-icons/io5";
 
@@ -16,6 +17,9 @@ const ACard = () => {
         <CardContent className='flex items-center '>
           <span className='mr-2'>おススメ度:</span>
           <IoMdStar className='text-yellow-400 text-2xl border-black' />
+          <IoMdStar className='text-yellow-400 text-2xl border-black' />
+          <IoMdStar className='text-yellow-400 text-2xl border-black' />
+          <IoMdStar className='text-yellow-400 text-2xl border-black' />
           <IoStarOutline className='text-xl'/>
         </CardContent>
         <CardFooter className="flex justify-center">
@@ -23,7 +27,7 @@ const ACard = () => {
         </CardFooter>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default ACard
+export default ACard;
