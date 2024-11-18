@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { User } from 'lucide-react'
 import Link from "next/link"
 
-const UserInf = () => {
+const Settings = () => {
   return (
     <div>
       <div className="flex items-center">
@@ -16,4 +16,4 @@ const UserInf = () => {
   )
 }
 
-export default UserInf
+export default Settings

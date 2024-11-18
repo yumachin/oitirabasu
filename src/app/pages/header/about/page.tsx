@@ -1,12 +1,15 @@
-'use client'
+'use client';
 
 // アニメーションを追加するライブラリ
-import { motion } from 'framer-motion'
-import { Card, CardContent } from "@/components/ui/card"
-import { Handshake, TriangleAlert, Mail, ChevronRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { useRouter } from 'next/navigation'
-import Header from '@/components/layouts/header/Header'
+import Header from '@/components/layouts/header/Header';
+import { cards } from '@/utils/header/aboutCards';
+
+import { useRouter } from 'next/navigation';
+
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from '@/components/ui/button';
+import { ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const About = () => {
   const animation = {
@@ -15,28 +18,20 @@ const About = () => {
     // アニメーションの最終状態を定義。不透明度を1にし、y位置を0（元の位置）に戻す
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.6 }
-  }
-  const cards = [
-    { icon: Handshake, title: "By Everyone", description: "OITirabasuは在校生みんなで作り上げていくものです。新入生のためにアカウントを登録をして、積極的に授業の書き込みを行いましょう。" },
-    { icon: TriangleAlert, title: "Attention", description: "コメントの中には、でたらめを書いたものがあるかもしれません。コメントを信用しすぎないように気を付けましょう。" },
-    { icon: Mail, title: "Contact", description: "不具合報告フォームは作成中です。もし不具合など発見されましたら、恐れ入りますが0120-654-321にお問い合わせください。" }
-  ]
+  };
   const router = useRouter();
   
   return (
     <>
       <Header />
       <div className="min-h-screen bg-gray-200 py-6 sm:pt-28 px-4">
-        <motion.div 
-          className="max-w-7xl mx-auto"
-        >
+        <motion.div className="max-w-7xl mx-auto">
           <div className="text-center mb-12 sm:mb-12">
             <motion.h1 
               className="text-4xl font-bold text-gray-800 sm:text-6xl"
               {...animation}
             >
               About
-              
             </motion.h1>
             <motion.p 
               className="mt-3 sm:mt-12 max-w-md sm:max-w-3xl mx-auto text-gray-600 sm:text-xl"
@@ -79,7 +74,7 @@ const About = () => {
           <motion.div className="mt-16 sm:mt-24 mb-12 text-center" {...animation}>
             <Button 
               className="items-center px-10 py-6 text-base rounded-md text-white bg-indigo-600 hover:bg-indigo-500"
-              onClick={() => router.push("/pages/register")}
+              onClick={() => router.push("/pages/sign/signUp")}
             >
               新規登録
               <ChevronRight className="ml-1 -mr-4" />

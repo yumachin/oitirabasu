@@ -1,23 +1,18 @@
 "use client";
 
+import Header from "@/components/layouts/header/Header";
 import useSignIn from "@/hooks/auth/useSignIn";
-import { useRouter } from "next/navigation";
-import { ReactNode } from "react";
-
+import { SignProps } from "@/types/types";
 import { signInSchema } from "@/utils/signValidation/signInSchema";
+
+import { ReactNode } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { SubmitHandler, useForm } from "react-hook-form";
-import Link from "next/link";
-import Header from "@/components/layouts/header/Header";
-
-interface LoginForm {
-  email: string;
-  password: string;
-}
-
 const Login = () => {
-  const { register, handleSubmit, formState: { errors }, setError } = useForm<LoginForm>({
+  const { register, handleSubmit, formState: { errors }, setError } = useForm<SignProps>({
     defaultValues: {
       email: "",
       password: ""
@@ -26,10 +21,10 @@ const Login = () => {
     resolver: zodResolver(signInSchema)
   });
 
-  const { signIn } = useSignIn( setError )
+  const { signIn } = useSignIn(setError)
   const router = useRouter()
 
-  const handleLogin: SubmitHandler<LoginForm> = async ( formData ) => {
+  const handleLogin: SubmitHandler<SignProps> = async ( formData ) => {
     const signin = await signIn({ email: formData.email, password: formData.password })
     // エラーが吐かれなかった時だけルートディレクトリに移動
     if (signin && signin.error === null) {

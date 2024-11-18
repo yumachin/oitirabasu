@@ -1,5 +1,4 @@
 import Header from '@/components/layouts/header/Header'
-import React from 'react'
 
 const Members = () => {
   return (

@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button'
 import { LogIn } from 'lucide-react'
 import Link from 'next/link'
 
-const In = () => {
+const SignIn = () => {
   return (
     <div>
       <div className="flex items-center">
@@ -16,4 +16,4 @@ const In = () => {
   )
 }
 
-export default In
+export default SignIn
