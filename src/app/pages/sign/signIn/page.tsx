@@ -8,10 +8,16 @@ import { signInSchema } from "@/utils/signValidation/signInSchema";
 import { ReactNode } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { SubmitHandler, useForm } from "react-hook-form";
+
+// npm i @hookform/resolvers
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const Login = () => {
+// reactのversionが19.00の場合react-hook-formをインストールできないので、npm i react@18.2.0 react-dom@18.2.0でダウングレード
+// npm i react-hook-form
+import { SubmitHandler, useForm } from "react-hook-form";
+
+const SignIn = () => {
+  // SignProps: useFormに渡すデータの型
   const { register, handleSubmit, formState: { errors }, setError } = useForm<SignProps>({
     defaultValues: {
       email: "",
@@ -21,9 +27,10 @@ const Login = () => {
     resolver: zodResolver(signInSchema)
   });
 
-  const { signIn } = useSignIn(setError)
-  const router = useRouter()
+  const { signIn } = useSignIn(setError);
+  const router = useRouter();
 
+  // SignProps: SubmitHandlerがどのようなデータを受け取るかを指定
   const handleLogin: SubmitHandler<SignProps> = async ( formData ) => {
     const signin = await signIn({ email: formData.email, password: formData.password })
     // エラーが吐かれなかった時だけルートディレクトリに移動
@@ -77,4 +84,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignIn;

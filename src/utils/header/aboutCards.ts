@@ -1,3 +1,4 @@
+// npm i lucide-react
 import { Handshake, TriangleAlert, Mail } from 'lucide-react';
 
 export const cards = [

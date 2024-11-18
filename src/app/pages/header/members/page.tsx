@@ -1,4 +1,4 @@
-import Header from '@/components/layouts/header/Header'
+import Header from '@/components/layouts/header/Header';
 
 const Members = () => {
   return (
@@ -6,7 +6,7 @@ const Members = () => {
       <Header />
       members Page
     </div>
-  )
-}
+  );
+};
 
-export default Members
+export default Members;

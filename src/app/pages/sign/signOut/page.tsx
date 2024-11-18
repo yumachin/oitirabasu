@@ -1,17 +1,17 @@
 "use client"
 
 import useSignOut from '@/hooks/auth/useSignOut';
-import { useRouter } from 'next/navigation';
-import React from 'react'
 
-const page = () => {
+import { useRouter } from 'next/navigation';
+
+const SignOut = () => {
   const signOut = useSignOut();
   const router = useRouter();
 
   const handleOut = async () => {
     await signOut()
     router.push("/");
-  }
+  };
 
   return (
     <div className='flex justify-center items-center' onClick={handleOut}>
@@ -19,7 +19,7 @@ const page = () => {
         ログアウト
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default SignOut;

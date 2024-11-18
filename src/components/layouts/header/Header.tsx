@@ -9,7 +9,9 @@ import { supabase } from '@/utils/supabase';
 
 import { useEffect, useState } from 'react';
 
+// npm i lucide-react
 import { Menu } from 'lucide-react';
+
 // セッション状態を知るための型定義
 import { Session } from '@supabase/supabase-js';
 

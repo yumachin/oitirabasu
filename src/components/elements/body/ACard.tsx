@@ -1,6 +1,10 @@
 import Link from 'next/link';
 
+// npx shadcn@latest init
+// npx shadcn@latest add ~
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+
+// npm i react-icons
 import { IoMdStar } from "react-icons/io";
 import { IoStarOutline } from "react-icons/io5";
 

@@ -1,18 +1,22 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { ReactNode } from "react";
 
+import Header from "@/components/layouts/header/Header";
+import useSignUp from "@/hooks/auth/useSignUp";
+import { SignProps } from "@/types/types";
 import { signUpSchema } from "@/utils/signValidation/signUpSchema";
+
+import { ReactNode } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+
+// npm i @hookform/resolvers
 import { zodResolver } from "@hookform/resolvers/zod";
 
 // reactのversionが19.00の場合react-hook-formをインストールできないので、npm i react@18.2.0 react-dom@18.2.0でダウングレード
 // npm i react-hook-form
 import { SubmitHandler, useForm } from "react-hook-form";
-import Link from "next/link";
-import Header from "@/components/layouts/header/Header";
-import useSignUp from "@/hooks/auth/useSignUp";
 
-const Register = () => {
+const SignUp = () => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     // 初期値を指定(下で定義したhandleRegisterには引数が必要　=> email, passwordプロパティをstring型で指定しているに初期値がないとnullになってしまう)
     defaultValues: {
@@ -29,7 +33,7 @@ const Register = () => {
   // SubmitHandler: 型定義
   // <{ email: string; password: string }>: formDataオブジェクトにはemailとpasswordがあり、両方がstringだと型指定
   // formData: フォームから送られてきたオブジェクト
-  const handleRegister: SubmitHandler<{ email: string; password: string }> = async ( formData ) => {
+  const handleRegister: SubmitHandler<SignProps> = async ( formData ) => {
     await signUp({ email: formData.email, password: formData.password });
     router.push("/");
   };
@@ -78,4 +82,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default SignUp;

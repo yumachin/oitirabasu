@@ -1,14 +1,17 @@
 'use client';
 
-// アニメーションを追加するライブラリ
 import Header from '@/components/layouts/header/Header';
 import { cards } from '@/utils/header/aboutCards';
 
 import { useRouter } from 'next/navigation';
 
+// npx shadcn@latest init
+// npx shadcn@latest add ~
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
+
+// アニメーションを追加するライブラリ
 import { motion } from 'framer-motion';
 
 const About = () => {
@@ -83,7 +86,7 @@ const About = () => {
         </motion.div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default About
+export default About;

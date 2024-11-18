@@ -1,6 +1,10 @@
 import Link from "next/link";
 
+// // npx shadcn@latest init
+// npx shadcn@latest add ~
 import { Button } from "@/components/ui/button";
+
+// npm i lucide-react
 import { User } from 'lucide-react';
 
 const Settings = () => {
