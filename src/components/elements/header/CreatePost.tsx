@@ -18,7 +18,7 @@ const CreatePost = () => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    console.log('押されたよ！');
+    console.log('CreatePostが押されたよ！');
     setIsOpen(false);
   };
 

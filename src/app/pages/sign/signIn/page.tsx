@@ -37,8 +37,8 @@ const SignIn = () => {
     if (signin && signin.error === null) {
       router.push("/"); // 成功時にホーム画面へ遷移
     }
-    console.log("emailは", errors.email?.message)
-    console.log("passwordは", errors.password?.message)
+    console.log("SignInしたときのemailは", errors.email?.message)
+    console.log("SignInしたときのpasswordは", errors.password?.message)
   };
 
   return (
