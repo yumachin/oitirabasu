@@ -7,7 +7,7 @@ export const main = async () => {
   try {
     await prisma.$connect();
   } catch ( err ) {
-    return Error("DB接続に失敗しました");
+    return Error("DB接続に失敗しました。");
   }
 };
 

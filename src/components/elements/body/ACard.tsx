@@ -27,7 +27,7 @@ const ACard = () => {
           <IoStarOutline className='text-xl'/>
         </CardContent>
         <CardFooter className="flex justify-center">
-          <Link href={"/pages/1"}>Read More</Link>
+          <Link href={"/"}>Read More</Link>
         </CardFooter>
       </Card>
     </div>

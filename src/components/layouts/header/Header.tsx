@@ -3,7 +3,7 @@
 import Title from '@/components/elements/header/Title';
 import Selecions from '@/components/elements/header/Selections';
 import CreatePost from '@/components/elements/header/CreatePost';
-import SignIn from '@/components/elements/header/SignIn';
+import Login from '@/components/elements/header/Login';
 import Settings from '@/components/elements/header/Settings';
 import { supabase } from '@/utils/supabase';
 
@@ -51,7 +51,7 @@ export default function Header() {
         </div>
         <div className="flex items-center sm:space-x-10">
           {session ? <CreatePost /> : <></>}
-          {session ? <></> : <SignIn />}
+          {session ? <></> : <Login />}
           {session ? <Settings /> : <></>}
         </div>
       </div>

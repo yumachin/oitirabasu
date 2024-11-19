@@ -5,7 +5,7 @@ export interface UserType {
   email:   string;
   name:    string;
   posts:   PostType[];
-}
+};
 
 export interface PostType {
   id:        number;
@@ -16,10 +16,11 @@ export interface PostType {
   content:   string;
   author?:   UserType;
   authorId?: number;
-}
+};
 
 
 export interface SignProps {
+  name?:    string;
   email:    string;
   password: string;
-}
+};

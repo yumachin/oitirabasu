@@ -18,7 +18,8 @@ model User {
   // 認証システムで使用するid
   auth_id   String    @unique
   email     String    @unique
-  name      String
+  // session情報がnullにならないためのオプショナルチェーン
+  name      String?
   posts     Post[]
 }
 

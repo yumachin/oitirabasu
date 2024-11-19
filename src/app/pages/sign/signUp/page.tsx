@@ -20,6 +20,7 @@ const SignUp = () => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     // 初期値を指定(下で定義したhandleRegisterには引数が必要　=> email, passwordプロパティをstring型で指定しているに初期値がないとnullになってしまう)
     defaultValues: {
+      name: "",
       email: "",
       password: "",
     },
@@ -27,13 +28,15 @@ const SignUp = () => {
     resolver: zodResolver(signUpSchema)
   });
 
-  const signUp   = useSignUp();
+  const signUp = useSignUp();
   const router = useRouter();
 
   // SubmitHandler: 型定義
-  // <{ email: string; password: string }>: formDataオブジェクトにはemailとpasswordがあり、両方がstringだと型指定
   // formData: フォームから送られてきたオブジェクト
-  const handleRegister: SubmitHandler<SignProps> = async ( formData ) => {
+  const handleSignUp: SubmitHandler<SignProps> = async ( formData ) => {
+    console.log("formData.name", formData.name);
+    console.log("formData.email", formData.email);
+    console.log("formData.password", formData.password);
     await signUp({ email: formData.email, password: formData.password });
     router.push("/");
   };
@@ -43,7 +46,18 @@ const SignUp = () => {
       <Header />
       <div className="flex justify-center items-center flex-col h-screen">
         <h1 className="mb-8 text-4xl">新規アカウント登録画面</h1>
-        <form onSubmit={handleSubmit( handleRegister )} className="w-full max-w-md">
+        <form onSubmit={handleSubmit( handleSignUp )} className="w-full max-w-md">
+          <div className="mb-6">
+            <input 
+              type="text" 
+              placeholder="名前"
+              className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-500"
+              // register("name")により、入力された値がreact-hook-formの内部で name というキー名で管理されるようになる
+              {...register("name")}
+            />
+            <p className="text-red-500 text-sm mt-1 ml-1">{errors.name?.message as ReactNode}</p>
+          </div>
+
           <div className="mb-6">
             <input 
               type="email" 
@@ -72,7 +86,7 @@ const SignUp = () => {
             新規アカウント作成
           </button>
         </form>
-        <Link href={"/user/login"}
+        <Link href={"/pages/sign/signIn"}
           className="mt-24 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500"
         >
           ログイン画面へ
