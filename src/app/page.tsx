@@ -4,7 +4,7 @@ import CardList from '@/components/elements/body/CardList';
 
 const Home = () => {
   return (
-    <main>
+    <main className='bg-gray-200'>
       <Header />
       <Space />
       <CardList />

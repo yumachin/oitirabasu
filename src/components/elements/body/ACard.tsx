@@ -11,7 +11,7 @@ import { IoStarOutline } from "react-icons/io5";
 const ACard = () => {
   return (
     <div>
-      <Card>
+      <Card className='bg-white border'>
         <CardHeader>
           <CardTitle>線形代数学Ⅰ</CardTitle>
           <div className='flex justify-end'>

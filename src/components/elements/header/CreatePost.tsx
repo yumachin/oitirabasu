@@ -10,9 +10,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
-// npm i lucide-react
-import { PlusCircle } from 'lucide-react';
-
 const CreatePost = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -26,9 +23,8 @@ const CreatePost = () => {
     <div>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
-          <Button size="sm" className="hidden lg:flex bg-gray-500 hover:bg-gray-600">
-            <PlusCircle className="mr-2 h-4 w-4" />
-            Create Post
+          <Button size="sm" className="hidden lg:px-6 lg:flex bg-gray-500 hover:bg-gray-600">
+            過去の投稿
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">

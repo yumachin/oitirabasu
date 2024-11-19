@@ -25,13 +25,13 @@ const About = () => {
   const router = useRouter();
   
   return (
-    <>
+    <div className='min-h-screen'>
       <Header />
-      <div className="min-h-screen bg-gray-200 py-6 sm:pt-28 px-4">
+      <div className="pt-20 sm:pt-28 px-4">
         <motion.div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 sm:mb-12">
+          <div className="text-center mb-12">
             <motion.h1 
-              className="text-4xl font-bold text-gray-800 sm:text-6xl"
+              className="text-4xl font-bold text-gray-800 sm:text-6xl mb-6"
               {...animation}
             >
               About
@@ -74,7 +74,7 @@ const About = () => {
               ))}
             </motion.div>
           </div>
-          <motion.div className="mt-16 sm:mt-24 mb-12 text-center" {...animation}>
+          <motion.div className="mt-16 sm:mt-24 mb-6 text-center" {...animation}>
             <Button 
               className="items-center px-10 py-6 text-base rounded-md text-white bg-indigo-600 hover:bg-indigo-500"
               onClick={() => router.push("/pages/sign/signUp")}
@@ -85,7 +85,7 @@ const About = () => {
           </motion.div>
         </motion.div>
       </div>
-    </>
+    </div>
   );
 };
 
