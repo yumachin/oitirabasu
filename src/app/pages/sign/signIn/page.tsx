@@ -1,7 +1,7 @@
 "use client";
 
 import Header from "@/components/layouts/header/Header";
-import useSignIn from "@/hooks/auth/useSignIn";
+import { useSignIn } from "@/hooks/auth/useSignIn";
 import { SignProps } from "@/types/types";
 import { signInSchema } from "@/utils/signValidation/signInSchema";
 
@@ -33,7 +33,7 @@ const SignIn = () => {
     resolver: zodResolver(signInSchema)
   });
 
-  const { signIn } = useSignIn(setError);
+  const signIn = useSignIn(setError);
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -44,8 +44,6 @@ const SignIn = () => {
     if (signin && signin.error === null) {
       router.push("/"); // 成功時にホーム画面へ遷移
     }
-    console.log("SignInしたときのemailは", errors.email?.message);
-    console.log("SignInしたときのpasswordは", errors.password?.message);
   };
 
   return (

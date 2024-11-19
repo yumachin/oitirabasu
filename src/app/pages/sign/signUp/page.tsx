@@ -1,7 +1,7 @@
 "use client";
 
 import Header from "@/components/layouts/header/Header";
-import useSignUp from "@/hooks/auth/useSignUp";
+import { useSignUp } from "@/hooks/auth/useSignUp";
 import { SignProps } from "@/types/types";
 import { signUpSchema } from "@/utils/signValidation/signUpSchema";
 

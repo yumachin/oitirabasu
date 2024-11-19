@@ -1,7 +1,7 @@
 import { supabase } from "@/utils/supabase";
 
-export default function useSignOut () {
-  async function signOut() {
+export const useSignOut = () => {
+  const signOut = async () => {
     // session終了
     await supabase.auth.signOut();
   };
