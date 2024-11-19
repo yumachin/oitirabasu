@@ -18,7 +18,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 const SignUp = () => {
   const { register, handleSubmit, formState: { errors } } = useForm({
-    // 初期値を指定(下で定義したhandleRegisterには引数が必要　=> email, passwordプロパティをstring型で指定しているに初期値がないとnullになってしまう)
+    // 初期値を指定(下で定義したhandleRegisterには引数が必要　=> name, email, passwordプロパティをstring型で指定しているに初期値がないとnullになってしまう)
     defaultValues: {
       name: "",
       email: "",
@@ -37,7 +37,7 @@ const SignUp = () => {
     console.log("formData.name", formData.name);
     console.log("formData.email", formData.email);
     console.log("formData.password", formData.password);
-    await signUp({ email: formData.email, password: formData.password });
+    await signUp({ name: formData.name, email: formData.email, password: formData.password });
     router.push("/");
   };
 
