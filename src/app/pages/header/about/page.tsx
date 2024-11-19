@@ -60,7 +60,7 @@ const About = () => {
                 <motion.div key={index} variants={animation}>
                   <Card className="h-full hover:shadow-xl transition-shadow duration-300">
                     <CardContent className="p-6 flex flex-col items-center text-center">
-                      <item.icon className="h-12 w-12 text-indigo-500" />
+                      <item.icon className="h-12 w-12 text-slate-400" />
                       <h2 className="text-2xl font-bold text-gray-900 mb-5">{item.title}</h2>
                       {item.title === "Attention" ? (
                         <p className='text-red-500 font-black'>落単には一切の責任を負いません。</p>
@@ -76,10 +76,10 @@ const About = () => {
           </div>
           <motion.div className="mt-16 sm:mt-24 mb-6 text-center" {...animation}>
             <Button 
-              className="items-center px-10 py-6 text-base rounded-md text-white bg-indigo-600 hover:bg-indigo-500"
+              className="items-center px-10 py-6 text-base rounded-md text-white bg-slate-700 hover:bg-slate-800"
               onClick={() => router.push("/pages/sign/signUp")}
             >
-              新規登録
+              新規アカウント登録
               <ChevronRight className="ml-1 -mr-4" />
             </Button>
           </motion.div>
