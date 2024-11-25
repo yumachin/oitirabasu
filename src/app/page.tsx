@@ -1,13 +1,13 @@
-import Header from '@/components/layouts/header/Header';
-import Space from '@/components/layouts/space/Space';
-import CardList from '@/components/elements/body/CardList';
+import Header from '@/components/header/Header';
+import Space from '@/components/space/Space';
+import Subjects from '@/components/elements/Subjects';
 
 const Home = () => {
   return (
     <main className='bg-gray-200'>
       <Header />
       <Space />
-      <CardList />
+      <Subjects />
     </main>
   );
 };
