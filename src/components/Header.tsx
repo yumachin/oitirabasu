@@ -1,40 +1,34 @@
 "use client";
 
-import CreatePost from '../elements/CreatePost';
-import Links from '../elements/Links';
-import LoginForm from '../elements/LoginForm';
-import Setting from '../elements/Setting';
+import CreatePost from './elements/CreatePost';
+import Links from './elements/Links';
+import LoginForm from './elements/LoginForm';
+import Setting from './elements/Setting';
 import { supabase } from '@/lib/supabaseClient';
 
 import { useEffect, useState } from 'react';
+// セッション状態を知るための型定義
+import { Session } from '@supabase/supabase-js';
 
 // npm i lucide-react
 import { Menu } from 'lucide-react';
-
-// セッション状態を知るための型定義
-import { Session } from '@supabase/supabase-js';
 
 export default function Header() {
   // 認証状態か否か
   const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
-    // 認証状態の初期チェック
-    // .then(): 非同期処理(セッション情報を取得が非同期)が成功したときの挙動
-    // getSession()の結果には、dataオブジェクトの中にsessionプロパティが含まれており、これには現在のセッション情報が格納
+    // 初回レンダリング時にセッション情報を更新
+    // supabase.auth.getSession(): セッション情報を取得
+    // dataプロパティの中のsessionプロパティを分割代入で直接取得
     supabase.auth.getSession().then(({ data: { session } }) => {
-      console.log("components/Header.tsxのsessionは", session);
       setSession(session);
     });
-
-    // hooks/useSignInと同じ挙動
-    // 認証状態の変更を監視
-    const { data } = supabase.auth.onAuthStateChange((_, session) => {
+    // 認証状態の変更時にセッション情報を更新(hooks/useUser.tsと同じ挙動)
+    const { data } = supabase.auth.onAuthStateChange(( _, session ) => {
         setSession(session);
       }
     );
-
-    // クリーンアップ
     return () => {
       data.subscription.unsubscribe();
     };

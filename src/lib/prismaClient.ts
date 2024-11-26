@@ -1,3 +1,6 @@
+// npm i prisma
+// npx prisma init
+// npm i @prisma/client
 // コピペ
 import { PrismaClient } from '@prisma/client';
 

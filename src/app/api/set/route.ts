@@ -1,41 +1,24 @@
 import prisma from "@/lib/prismaClient";
-import { supabase } from "@/utils/supabase";
+import { supabase } from "@/lib/supabaseClient";
 
 import { NextResponse } from "next/server";
 
 export const PUT = async (req: Request) => {
   try {
+    // Authorization: signOutページの50行目
     const authHeader = req.headers.get("Authorization");
+    // accessToken: signOutページの50行目からBearerを除いた部分
     const accessToken = authHeader?.split(" ")[1];
 
-    if (!accessToken) {
-      return NextResponse.json({ message: "認証トークンが見つかりません。" }, { status: 401 });
-    }
+    // supabase.auth.getUser: ユーザー情報を取得し、そのユーザー情報のuserプロパティを分割代入で直接取得
+    const { data: { user } } = await supabase.auth.getUser(accessToken);
+    const email = user?.email;
 
-    const { data: { user }, error } = await supabase.auth.getUser(accessToken); // トークンを検証してユーザーを取得
-
-    if (error || !user) {
-      return NextResponse.json({ message: "無効なトークンです。" }, { status: 401 });
-    }
-
-    const email = user.email;
-    if (!email) {
-      return NextResponse.json({ message: "メールアドレスが見つかりません。" }, { status: 400 });
-    }
-
+    // signOutページの53行目からnameプロパティを分割代入で直接取得
     const { name } = await req.json();
-    if (!name) {
-      return NextResponse.json({ message: "名前が無効です。" }, { status: 400 });
-    }
-
-    const newName = await prisma.user.update({
-      where: { email },
-      data: { name },
-    });
-
+    const newName = await prisma.user.update({ where: { email }, data: { name } });
     return NextResponse.json({ message: "Success", newName }, { status: 200 });
-  } catch (error) {
-    console.error("エラー:", error);
-    return NextResponse.json({ message: "サーバーエラー", error }, { status: 500 });
+  } catch ( error ) {
+    return NextResponse.json({ message: "failed", error }, { status: 500 });
   }
 };

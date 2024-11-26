@@ -3,9 +3,8 @@ import { subjects } from '@/utils/datas';
 import Link from 'next/link';
 
 // npx shadcn@latest init
-// npx shadcn@latest add ~
+// npx shadcn@latest add Card
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-
 // npm i react-icons
 import { IoMdStar } from "react-icons/io";
 import { IoStarOutline } from "react-icons/io5";

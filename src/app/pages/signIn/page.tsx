@@ -1,6 +1,6 @@
 "use client";
 
-import Header from "@/components/header/Header";
+import Header from "@/components/Header";
 import { useSignIn } from "@/hooks/useSignIn";
 import { SignProps } from "@/types/types";
 import { signInSchema } from "@/utils/validation";
@@ -8,13 +8,13 @@ import { signInSchema } from "@/utils/validation";
 import { ReactNode, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
 // npm i @hookform/resolvers
 import { zodResolver } from "@hookform/resolvers/zod";
-
 // reactのversionが19.00の場合react-hook-formをインストールできないので、npm i react@18.2.0 react-dom@18.2.0でダウングレード
 // npm i react-hook-form
 import { SubmitHandler, useForm } from "react-hook-form";
+// npm i react-hot-toast
+import toast, { Toaster } from "react-hot-toast";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -37,17 +37,20 @@ export default function SignIn() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
-  // SignProps: SubmitHandlerがどのようなデータを受け取るかを指定
+  // SubmitHandler: react-hook-formを使っている時利用される型
+  // SignProps: SubmitHandlerがどんなデータを受け取るかを型指定
+  // formData: フォームから送られてきたオブジェクト
   const handleLogin: SubmitHandler<SignProps> = async ( formData ) => {
-    const signin = await signIn({ email: formData.email, password: formData.password })
-    // エラーが吐かれなかった時だけルートディレクトリに移動
-    if (signin && signin.error === null) {
-      router.push("/"); // 成功時にホーム画面へ遷移
-    }
+    toast.loading("Loading...", {id: '1'});
+    const signin = await signIn({ email: formData.email, password: formData.password });
+    toast.success("Success!", {id: '1'});
+    router.push("/");
+    router.refresh();
   };
 
   return (
     <>
+      <Toaster />
       <Header />
       <div className="flex justify-center items-center flex-col h-screen">
         <Card className="w-full max-w-md bg-white">
@@ -100,7 +103,7 @@ export default function SignIn() {
             </CardFooter>
           </form>
           <CardFooter className="flex flex-col items-center">
-            <Link href={"/pages/sign/signUp"} className="text-sm text-center text-slate-500 hover:text-slate-700">まだ登録をお済みでない方はこちら</Link>
+            <Link href={"/pages/signUp"} className="text-sm text-center text-slate-500 hover:text-slate-700">まだ登録をお済みでない方はこちら</Link>
           </CardFooter>
         </Card>
       </div>

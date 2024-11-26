@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 
 // npx shadcn@latest init
-// npx shadcn@latest add ~
+// npx shadcn@latest add button
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -13,9 +13,8 @@ import { Textarea } from "@/components/ui/textarea";
 export default function CreatePost() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = ( event: FormEvent ) => {
     event.preventDefault();
-    console.log('CreatePostが押されたよ！');
     setIsOpen(false);
   };
 
@@ -34,7 +33,7 @@ export default function CreatePost() {
               Share your thoughts with the community. Be respectful and follow our community guidelines.
             </DialogDescription>
           </DialogHeader>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={ handleSubmit } className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="title">Title</Label>
               <Input id="title" placeholder="Enter your post title" required />

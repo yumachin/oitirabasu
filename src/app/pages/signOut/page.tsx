@@ -1,12 +1,14 @@
 "use client"
 
-import Header from '@/components/header/Header';
+import Header from '@/components/Header';
 import { useSignOut } from '@/hooks/useSignOut';
 import { useUser } from '@/hooks/useUser';
 import { supabase } from '@/lib/supabaseClient';
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+// npm i react-hot-toast
+import toast, { Toaster } from 'react-hot-toast';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -26,10 +28,8 @@ export default function SignOut() {
   useEffect(() => {
     const getEmail = async () => {
       // 取得したemailとUserテーブルのemailが一致する行のnameを取得
-      const { data } = await supabase.from('User').select('name').eq('email', email); 
       // data = [{name: 'ゆうま'}]
-      // console.log("dataは", data)
-
+      const { data } = await supabase.from('User').select('name').eq('email', email); 
       // data/sessionがnullの可能性があるため
       if ( data && session ) {
         setName(data[0].name);
@@ -40,23 +40,30 @@ export default function SignOut() {
 
   // ニックネームを更新する関数
   const sendName = async ( name: string | undefined ) => {
-    // supabase.auth.getSession(): Supabaseが管理するsessionを取得
+    // supabase.auth.getSession(): sessionを取得
     const { data: { session } } = await supabase.auth.getSession();
     const res = await fetch("/api/set", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        // Authorization: HTTPリクエストに認証情報を渡す
+        // Bearer: トークンの認証方式の１つ
         Authorization: `Bearer ${session?.access_token}`
       },
-      // PUTする値を指定(nameで上書きする)
+      // PUTする値を指定(nameで更新)
       body: JSON.stringify({ name })
     })
     return await res.json();
   }
 
   const saveName = async () => {
+    toast.loading("Loading...", {id: '1'});
     const result = await sendName(name);
-    result.message === 'Success' && router.push("/");
+    if ( result.message === 'Success' ) {
+      toast.success("Success!", {id: '1'});
+      router.push("/");
+      router.refresh();
+    }
   };
 
   const handleLogOut = async () => {
@@ -66,6 +73,7 @@ export default function SignOut() {
   
   return (
     <>
+      <Toaster />
       <Header />
       <div className="min-h-screen flex items-center justify-center p-4">
         <Card className="w-full max-w-2xl bg-white">

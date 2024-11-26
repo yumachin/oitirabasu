@@ -1,5 +1,5 @@
-import Header from '@/components/header/Header';
-import Space from '@/components/space/Space';
+import Header from '@/components/Header';
+import Space from '@/components/Space';
 import Subjects from '@/components/elements/Subjects';
 
 const Home = () => {

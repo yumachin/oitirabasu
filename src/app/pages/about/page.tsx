@@ -1,16 +1,13 @@
 'use client';
 
-import Header from '@/components/header/Header';
+import Header from '@/components/Header';
 import { aboutDetails } from '@/utils/datas';
 
 import { useRouter } from 'next/navigation';
 
-// npx shadcn@latest init
-// npx shadcn@latest add ~
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from "@/components/ui/card";
 import { ChevronRight } from 'lucide-react';
-
 // アニメーションを追加するライブラリ
 import { motion } from 'framer-motion';
 
@@ -77,7 +74,7 @@ export default function About() {
           <motion.div className="mt-16 sm:mt-24 mb-6 text-center" {...animation}>
             <Button 
               className="items-center px-10 py-6 text-base rounded-md text-white bg-slate-700 hover:bg-slate-800"
-              onClick={() => router.push("/pages/sign/signUp")}
+              onClick={() => router.push("/pages/signUp")}
             >
               新規アカウント登録
               <ChevronRight className="ml-1 -mr-4" />

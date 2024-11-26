@@ -1,10 +1,9 @@
 "use client";
 
-import { UserType } from "@/types/types";
 import { supabase } from "@/lib/supabaseClient";
+import { UserType } from "@/types/types";
 
 import { useEffect, useState } from "react";
-
 // Supabaseのセッション情報を表す型
 import { Session } from "@supabase/supabase-js";
 
@@ -13,11 +12,11 @@ export const useUser = () => {
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<UserType | null>(null);
 
-  // onAuthStateChangeをuseEffectの中に書かないと、コンポーネントが再レンダリングされるたびにリスナー(特定のイベントが発生した時実行する関数や仕組み)が再登録される
+  // onAuthStateChangeをuseEffectの中に書かないと、コンポーネントが再レンダリングされるたびにリスナー(イベント発生時に実行する関数)が再登録される
   useEffect(() => {
     // onAuthStateChange: ユーザーの認証状態の変化を監視(sessionが変化するたびに発火)
     // supabase.auth.onAuthStateChangeの返り値のdataプロパティをauthListenerに代入
-    const { data: authListener } = supabase.auth.onAuthStateChange((_, session) => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(( _, session ) => {
       setSession(session);
     });
     return () => {
@@ -29,7 +28,7 @@ export const useUser = () => {
 
   useEffect(() => {
     const setupUser = async () => {
-      if (session?.user.id) {
+      if ( session?.user.id ) {
         try {
           const { data, error } = await supabase
             .from("User")
@@ -37,9 +36,9 @@ export const useUser = () => {
             // auth_id列にsession.user.idが存在するのか
             .eq("auth_id", session.user.id)
             .single();
-          if (error) throw error;
+          if ( error ) throw error;
           setUser(data);
-        } catch (error) {
+        } catch ( error ) {
           console.error("ユーザー情報の取得に失敗しました。", error);
         }
       }

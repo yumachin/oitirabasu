@@ -14,7 +14,7 @@ export const subjects = [
     teacher: "塚本"
   },
   {
-    id: 2,
+    id: 2,  
     name: "線形代数学Ⅰ",
     teacher: "東海林"
   },
