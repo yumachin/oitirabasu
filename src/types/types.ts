@@ -1,23 +1,23 @@
 // schema.prismaで定義した通り
-export interface UserType {
+export interface User {
   id:      number;
   auth_id: string;
   email:   string;
   name:    string;
-  posts:   PostType[];
+  posts:   Comment[];
 };
 
-export interface PostType {
+export interface Comment {
   id:        number;
-  createdAt: Date;
-  updatedAt: Date;
+  db_id:     number;
+  createdAt: string;
+  updatedAt: string | null;
   stars:     number;
   title:     string;
   content:   string;
-  author?:   UserType;
-  authorId?: number;
+  author:    User;
+  authorId:  number;
 };
-
 
 export interface SignProps {
   name?:    string;

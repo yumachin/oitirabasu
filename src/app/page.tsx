@@ -2,7 +2,7 @@ import Header from '@/components/Header';
 import Space from '@/components/Space';
 import Subjects from '@/components/elements/Subjects';
 
-const Home = () => {
+export default function Home() {
   return (
     <main className='bg-gray-200'>
       <Header />
@@ -11,5 +11,3 @@ const Home = () => {
     </main>
   );
 };
-
-export default Home;

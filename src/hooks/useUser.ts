@@ -1,7 +1,7 @@
 "use client";
 
 import { supabase } from "@/lib/supabaseClient";
-import { UserType } from "@/types/types";
+import { User } from "@/types/types";
 
 import { useEffect, useState } from "react";
 // Supabaseのセッション情報を表す型
@@ -10,7 +10,7 @@ import { Session } from "@supabase/supabase-js";
 export const useUser = () => {
   // Loginしてる時: Sessionオブジェクト, Loginしてない時: null
   const [session, setSession] = useState<Session | null>(null);
-  const [user, setUser] = useState<UserType | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   // onAuthStateChangeをuseEffectの中に書かないと、コンポーネントが再レンダリングされるたびにリスナー(イベント発生時に実行する関数)が再登録される
   useEffect(() => {

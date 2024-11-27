@@ -3,41 +3,28 @@
 import CommentButton from '@/components/elements/CommentButton';
 import Header from '@/components/Header';
 import Space from '@/components/Space';
-import { supabase } from '@/lib/supabaseClient';
+import { Comment } from '@/types/types';
 
-import { useEffect, useState } from 'react';
-import { Session } from '@supabase/supabase-js';
+import { use, useEffect, useState } from 'react';
 
 import { CircleUser } from 'lucide-react';
-import { IoMdStar } from 'react-icons/io';
-import { IoStarOutline } from 'react-icons/io5';
+import { MdStar } from 'react-icons/md';
+import toast, { Toaster } from 'react-hot-toast';
 
-export default function PostDetail() {
-  const comments = [
-    { id: 3, author: "中井裕麻", content: "テストの配点が結構重いから、出席しなくても単位はとれるよ。", date: "November 26, 2024" },
-    { id: 2, author: "工藤構成", content: "全然シラバス通りの授業内容ではないから、シラバスに記載されてるような授業を期待している人は履修しない方がいいかも。", date: "November 16, 2024" },
-    { id: 1, author: "高橋清や", content: "単位はとれるけど、成績A取るのはめちゃくちゃ難しいから、GPA気にしている人にはお勧めできません。", date: "November 2, 2023" }
-  ];
-
-  const [session, setSession] = useState<Session | null>(null);
-
+export default function CommentDetail({ params }: { params: Promise<{ id : number }> }) {
+  const [comments, setComments] = useState([]);
+  const { id } = use(params);
+  
   useEffect(() => {
-    // 初回レンダリング時にセッション情報を更新
-    // supabase.auth.getSession(): セッション情報を取得
-    // dataプロパティの中のsessionプロパティを分割代入で直接取得
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
-    // 認証状態の変更時にセッション情報を更新(hooks/useUser.tsと同じ挙動)
-    const { data } = supabase.auth.onAuthStateChange(( _, session ) => {
-        setSession(session);
-      }
-    );
-    return () => {
-      data.subscription.unsubscribe();
-    };
-  }, []);
-
+    const getDetailComments = async ( id: number ) => {
+      const res = await fetch(`http://localhost:3000/api/comment/${id}`, {
+        cache: "no-store"
+      });
+      const data = await res.json();
+      setComments(data.comments);
+    }
+    getDetailComments(id);
+  }, [])
 
   return (
     <>
@@ -45,32 +32,37 @@ export default function PostDetail() {
       <Space />
       <div className="max-w-4xl mx-auto py-8">
         <ul className="space-y-10">
-          {comments.map((comment) => (
+          {comments.map(( comment: Comment ) => (
             <li key={comment.id} className="bg-white p-5 rounded-lg">
               <div className='flex justify-between'>
                 <div className="flex items-start mb-5">
                   <div className="mr-5">
-                    <CircleUser style={{ width: "2.5rem", height: "2.5rem" }}/>
+                    <CircleUser style={{ width: "2.5rem", height: "2.5rem" }} />
                   </div>
                   <div>
-                    <h3 className="font-semibold">{comment.author}</h3>
-                    <p className="text-sm text-gray-600">{comment.date}</p>
+                    <h3 className="font-semibold">{comment.author.name}</h3>
+                    <p className="text-sm text-gray-600">
+                      {comment.updatedAt === null ? new Date( comment.createdAt ).toDateString() : new Date( comment.updatedAt ).toDateString()}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <IoMdStar className='text-yellow-400 text-2xl border-black' />
-                  <IoMdStar className='text-yellow-400 text-2xl border-black' />
-                  <IoMdStar className='text-yellow-400 text-2xl border-black' />
-                  <IoStarOutline className='text-xl'/>
-                  <IoStarOutline className='text-xl'/>
+                  <div className="flex">
+                  {[...Array(comment.stars)].map((_, index) => (
+                    <MdStar key={index} className="w-8 h-8 text-yellow-400" />
+                  ))}
+                  {[...Array(5 - comment.stars)].map((_, index) => (
+                    <MdStar key={index} className="w-8 h-8 text-gray-400" />
+                  ))}
+                  </div>
                 </div>
               </div>
-              <p className="text-gray-800 font-semibold text-xl border-b border-gray-400 mb-4 pb-1">これは酷いです。</p>
-              <p className="text-gray-800">{comment.content}</p>
+              <p className="text-gray-800 font-bold text-2xl border-b border-gray-400 mb-4 pl-3 pb-1">{comment.title}</p>
+              <p className="text-gray-800 text-lg pl-6">{comment.content}</p>
             </li>
           ))}
         </ul>
-        {session ? <CommentButton /> : <></>}
+        <CommentButton />
       </div>
     </>
   );
