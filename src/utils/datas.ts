@@ -11,97 +11,115 @@ export const subjects = [
   {
     id: 1,
     name: "線形代数学Ⅰ",
-    teacher: "塚本"
+    teacher: "塚本",
+    type: "Semester"
   },
   {
     id: 2,  
     name: "線形代数学Ⅰ",
-    teacher: "東海林"
+    teacher: "東海林",
+    type: "Semester"
   },
   {
     id: 3,
     name: "物理学Ⅰ", 
-    teacher: "林(正人)"
+    teacher: "林(正人)",
+    type: "Quarter"
   },
   {
     id: 4,
     name: "物理学Ⅰ", 
-    teacher: "門内"
+    teacher: "門内",
+    type: "Quarter"
   },
   {
     id: 5,
     name: "文章表現基礎Ⅰ",
-    teacher: "米田"
+    teacher: "米田",
+    type: "Semester"
   },
   {
     id: 6,
     name: "造形演習",
-    teacher: "福原/松井/吉川/姜/脇田/・・・"
+    teacher: "福原/松井/吉川/姜/脇田/・・・",
+    type: "Semester"
   },
   {
     id: 7,
     name: "工学倫理",
-    teacher: "吉川/大須賀/今井/福原/郡"
-
+    teacher: "吉川/大須賀/今井/福原/郡",
+    type: "Quarter"
   },
   {
     id: 8,
     name: "基礎情報処理",
-    teacher: "井上（明）, 西田"
+    teacher: "井上（明）, 西田",
+    type: "Semester"
   },
   {
     id: 9,
     name: "キャリアデザイン",
-    teacher: "小林/倉前/白髪/井上(猛)"
+    teacher: "小林/倉前/白髪/井上(猛)",
+    type: "Semester"
   },
   {
     id: 10,
     name: "計測工学",
-    teacher: "大須賀"
+    teacher: "大須賀",
+    type: "Quarter"
   },
   {
     id: 11,
     name: "基礎ゼミナール",
-    teacher: "小林/井上(明)/大須賀/脇田/井上(剛)中山/瀬尾/・・・"
+    teacher: "小林/井上(明)/大須賀/脇田/井上(剛)中山/瀬尾/・・・",
+    type: "Semester"
   },
   {
     id: 12,
     name: "解析学Ⅰ",
-    teacher: "東海林"
+    teacher: "東海林",
+    type: "Semester"
   },
   {
     id: 13,
     name: "プラクティカル・イングリッシュa",
-    teacher: "横山(香)"
+    teacher: "横山(香)",
+    type: "Semester"
   },
   {
     id: 14,
     name: "プラクティカル・イングリッシュa",
-    teacher: "渡辺"
+    teacher: "渡辺",
+    type: "Semester"
   },
   {
     id: 15,
     name: "プラクティカル・イングリッシュa",
-    teacher: "村尾"
+    teacher: "村尾",
+    type: "Semester"
   },
   {
     id: 16,
     name: "プログラミング演習Ⅰ",
-    teacher: "小林/瀬尾"
+    teacher: "小林/瀬尾",
+    type: "Semester"
   },
   {
     id: 17,
     name: "健康体育Ⅰ",
-    teacher: "石道/西脇/小田(啓)/木内/橘"
+    teacher: "石道/西脇/小田(啓)/木内/橘",
+    type: "Semester"
   },
   {
     id: 18,
     name: "ものづくりデザイン演習",
-    teacher: "横山(広)/岩田/竹村/加藤/近藤/辻田/川浦/横川"
+    teacher: "横山(広)/岩田/竹村/加藤/近藤/辻田/川浦/横川",
+    type: "Semester"
   },
   {
     id: 19,
     name: "現代デザイン史",
-    teacher: "横山（広）"
+    teacher: "横山（広）",
+    type: "Quarter"
   },
 ]
