@@ -20,14 +20,15 @@ model User {
   email     String    @unique
   // session情報がnullにならないためのオプショナルチェーン
   name      String?
-  posts     Post[]
+  posts     Comment[]
 }
 
-model Post {
+model Comment {
   id        Int      @id @default(autoincrement())
+  db_id     Int
   createdAt DateTime @default(now())
   // @updatedAt: 自動的に最新の更新日時を設定
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime? @updatedAt
   stars     Int
   title     String
   content   String
@@ -35,9 +36,9 @@ model Post {
   // @relation: 他テーブルとのリレーションを設定
   // fields:　リレーションの外部キーを指定
   // references: [id]： Userモデルのidフィールドを参照
-  // PostのauthorId = Userモデルのidの時、そのUserが投稿のauthorであると判断
+  // CommentのauthorId = Userモデルのidの時、そのUserが投稿のauthorであると判断
   // ユーザーが削除された時を考慮して？を付与
   author    User?    @relation(fields: [authorId], references: [id])
-  // ポストする時に、ログイン情報からUserモデルのidを代入
+  // 投稿する時に、ログイン情報からUserモデルのidを代入
   authorId  Int?
 }

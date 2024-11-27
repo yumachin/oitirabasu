@@ -1,6 +1,6 @@
 "use client";
 
-import CreatePost from './elements/CreatePost';
+import CheckPastPosts from './elements/CheckPastPosts';
 import Links from './elements/Links';
 import LoginForm from './elements/LoginForm';
 import Setting from './elements/Setting';
@@ -45,7 +45,7 @@ export default function Header() {
           <Links />
         </div>
         <div className="flex items-center sm:space-x-10">
-          {session ? <CreatePost /> : <></>}
+          {session ? <CheckPastPosts /> : <></>}
           {session ? <></> : <LoginForm />}
           {session ? <Setting /> : <></>}
         </div>
