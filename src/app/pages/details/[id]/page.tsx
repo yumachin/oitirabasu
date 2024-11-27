@@ -36,7 +36,8 @@ export default function CommentDetail({ params }: { params: Promise<{ id : numbe
   
   useEffect(() => {
     const getDetailComments = async ( id: number ) => {
-      const res = await fetch(`http://localhost:3000/api/comment/${id}`, {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL;
+      const res = await fetch(`${API_URL}/api/comment/${id}`, {
         cache: "no-store"
       });
       const data = await res.json();
@@ -49,7 +50,16 @@ export default function CommentDetail({ params }: { params: Promise<{ id : numbe
     <>
       <Header />
       <Space />
-      <div className="max-w-4xl mx-auto py-8">
+      <div className="max-w-4xl mx-auto py-4 ">
+        {comments.length === 0 ? (
+          <div className='flex justify-center items-center'>
+            <p className='font-bold'>コメントはまだありません</p>
+          </div> ) : (
+          <div className='flex justify-center items-center'>
+            <p className='text-red-600 font-bold mb-4 mr-2'>{`${comments.length}　件`}</p>
+            <p className='mb-4'>ヒットしました</p>
+          </div> )
+        }
         <ul className="space-y-10">
           {comments.map(( comment: Comment ) => (
             <li key={comment.id} className="bg-white p-5 rounded-lg">
