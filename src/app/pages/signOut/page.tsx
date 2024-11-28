@@ -20,12 +20,14 @@ export default function SignOut() {
   const signOut = useSignOut();
   const { session } = useUser();
   const router = useRouter();
-
+  const [loading, setLoading] = useState(false);
   const [name, setName] = useState<string>("");
   // user: Userテーブル
   const email = session?.user.email;
 
+  // ニックネームを取得する関数
   useEffect(() => {
+    setLoading(true);
     const getEmail = async () => {
       // 取得したemailとUserテーブルのemailが一致する行のnameを取得
       // data = [{name: 'ゆうま'}]
@@ -34,6 +36,7 @@ export default function SignOut() {
       if ( data && session ) {
         setName(data[0].name);
       }
+      setLoading(false);
     }
     getEmail();
   }, [session]);
@@ -73,6 +76,15 @@ export default function SignOut() {
   
   return (
     <>
+      {loading ? (
+        <div className="flex justify-center items-center min-h-screen">
+          {/* animate-spin: 回転アニメーション適用 */}
+          {/* border-t-transparent: 円を上部を欠けさせる */}
+          <div className="h-24 w-24 border-4 border-indigo-400 rounded-full animate-spin border-t-transparent"></div>
+        </div>
+      ) : (
+        <></>
+      )}
       <Toaster />
       <Header />
       <div className="min-h-screen flex items-center justify-center p-4">

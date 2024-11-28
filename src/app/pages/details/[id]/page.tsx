@@ -16,6 +16,7 @@ export default function CommentDetail({ params }: { params: Promise<{ id : numbe
   const [session, setSession] = useState<Session | null>(null);
   const [comments, setComments] = useState([]);
   const { id } = use(params);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // 初回レンダリング時にセッション情報を更新
@@ -35,6 +36,7 @@ export default function CommentDetail({ params }: { params: Promise<{ id : numbe
   }, []);
   
   useEffect(() => {
+    setLoading(true);
     const getDetailComments = async ( id: number ) => {
       const API_URL = process.env.NEXT_PUBLIC_API_URL;
       const res = await fetch(`${API_URL}/api/comment/${id}`, {
@@ -42,12 +44,22 @@ export default function CommentDetail({ params }: { params: Promise<{ id : numbe
       });
       const data = await res.json();
       setComments(data.comments);
+      setLoading(false);
     }
     getDetailComments(id);
   }, [])
 
   return (
     <>
+      {loading ? (
+        <div className="flex justify-center items-center min-h-screen">
+          {/* animate-spin: 回転アニメーション適用 */}
+          {/* border-t-transparent: 円を上部を欠けさせる */}
+          <div className="h-24 w-24 border-4 border-indigo-400 rounded-full animate-spin border-t-transparent"></div>
+        </div>
+      ) : (
+        <></>
+      )}
       <Header />
       <Space />
       <div className="max-w-4xl mx-auto py-4 ">

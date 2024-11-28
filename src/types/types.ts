@@ -24,3 +24,9 @@ export interface SignProps {
   email:    string;
   password: string;
 };
+
+export interface CommentPost {
+  stars:    number;
+  title:   string;
+  content: string;
+};

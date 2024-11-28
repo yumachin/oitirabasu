@@ -13,27 +13,28 @@ export default function Subject() {
     {subjects.map(subject => (
       <div key={subject.id}>
         <Card 
-        className={`
-          ${subject.type === "1" ? "bg-gray-100" : ""}
-          ${subject.type === "2" ? "bg-slate-300" : ""}
-          ${subject.type === "3" ? "bg-custom-gray" : ""}
-        `}>
+          className={`
+            ${subject.type === "1" ? "bg-gray-100" : ""}
+            ${subject.type === "2" ? "bg-slate-300" : ""}
+            ${subject.type === "3" ? "bg-custom-gray" : ""}
+          `}
+        >
           <CardHeader>
-            <div className='flex justify-between pb-3'>
+            <div className='flex justify-between items-center pb-3'>
               <div className='flex items-center'>
                 {subject.require ? <IoIosCheckmarkCircle className='text-red-500 text-2xl mr-1' /> : <></>}
                 <CardTitle>{subject.name}</CardTitle>
               </div>
               {subject.other ? 
-                <p className='text-gray-500 text-sm'>{`(⊛${subject.other})`}</p> : 
+                <p className='font-bold text-gray-500 text-xs'>{`(⊛${subject.other})`}</p> : 
                 <></>
               }
             </div>
-            <CardDescription className='flex justify-end'>{subject.teacher}</CardDescription>
+            <p className='flex justify-end text-gray-600 text-xs'>{subject.teacher}</p>
           </CardHeader>
           <CardContent className='flex flex-col justify-center '>
             {subject.type === "1" && <span className='mr-2'>種類：共用共通科目</span>}
-            {subject.type === "2" && <span className='mr-2'>種類：数理科目</span>}
+            {subject.type === "2" && <span className='mr-2'>種類：工学関連科目</span>}
             {subject.type === "3" && <span className='mr-2'>種類：専門科目</span>}
             <span className='mr-2'>{`形式：${subject.span}`}</span>
           </CardContent>

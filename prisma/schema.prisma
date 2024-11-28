@@ -32,7 +32,7 @@ model Comment {
   stars     Int
   title     String
   content   String
-  // author: User { id: 1, name: "中井裕麻", email: "yuma@yuma.com" } が格納
+  // author: User { id: 1, email: "yuma@yuma.com", name: "中井裕麻", post: [] } が格納
   // @relation: 他テーブルとのリレーションを設定
   // fields:　リレーションの外部キーを指定
   // references: [id]： Userモデルのidフィールドを参照

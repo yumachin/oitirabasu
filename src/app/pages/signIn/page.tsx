@@ -25,10 +25,7 @@ import { EyeIcon, EyeOffIcon } from "lucide-react";
 export default function SignIn() {
   // SignProps: useFormに渡すデータの型
   const { register, handleSubmit, formState: { errors }, setError } = useForm<SignProps>({
-    defaultValues: {
-      email: "",
-      password: ""
-    },
+    defaultValues: { email: "", password: "" },
     mode: 'onChange',
     resolver: zodResolver(signInSchema)
   });
@@ -42,7 +39,7 @@ export default function SignIn() {
   // formData: フォームから送られてきたオブジェクト
   const handleLogin: SubmitHandler<SignProps> = async ( formData ) => {
     toast.loading("Loading...", {id: '1'});
-    const signin = await signIn({ email: formData.email, password: formData.password });
+    await signIn({ email: formData.email, password: formData.password });
     toast.success("Success!", {id: '1'});
     router.push("/");
     router.refresh();

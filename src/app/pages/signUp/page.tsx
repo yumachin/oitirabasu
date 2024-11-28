@@ -87,7 +87,7 @@ export default function SignUp() {
                 <div className="relative">
                   <Input 
                     id="password"
-                    type={showPassword ? "text" : "password"} 
+                    type={ showPassword ? "text" : "password" } 
                     {...register("password")} 
                     className="pr-10 transition duration-200 ease-in-out focus:ring-2 focus:ring-slate-500"
                   />

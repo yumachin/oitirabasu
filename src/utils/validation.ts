@@ -13,3 +13,9 @@ export const signInSchema = z.object({
   email: z.string().min(1, "メールアドレスは必須です。").email("正しいメールアドレスで入力してください。"),
   password: z.string().min(1, "パスワードは必須です。").min(6, "パスワードは6文字以上で入力してください。").max(25, "パスワードは25文字以内で入力してください。")
 });
+
+export const commentSchema = z.object({
+  stars: z.number(),
+  title: z.string().min(1, "タイトルは必須です。").max(30, "タイトルは30文字以内で入力してください。"),
+  content: z.string().min(1, "詳細内容は必須です。").max(200, "詳細内容は200文字以内で入力してください")
+});
