@@ -30,7 +30,6 @@ const postComment = async ( stars: number, title: string,  content: string, id: 
   return await res.json();
 };
 
-
 export default function Comment({ params }: { params: Promise<{ id : number }> }) {
   const stars = [1, 2, 3, 4, 5];
   const [count, setCount] = useState<number>(0);
@@ -80,7 +79,7 @@ export default function Comment({ params }: { params: Promise<{ id : number }> }
                       }}
                       className="focus:outline-none"
                     >
-                      <MdStar className={`w-8 h-8 ${ star <= count ? "text-yellow-300" : "text-gray-300" }`} />
+                      <MdStar className={`w-8 h-8 ${ star <= count ? "text-yellow-400" : "text-gray-300" }`} />
                     </button>
                   ))}
                 </div>

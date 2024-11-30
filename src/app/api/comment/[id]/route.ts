@@ -31,3 +31,15 @@ export const POST = async ( req: Request ) => {
     await prisma.$disconnect();
   }
 };
+
+export const DELETE = async ( req: Request ) => {
+  try {
+    const id: number = parseInt(req.url.split("/comment/")[1]); 
+    const comment = await prisma.comment.delete({ where: { id } });
+    return NextResponse.json({ messege: 'Success', comment }, { status: 200 });
+  } catch ( error ) {
+    return NextResponse.json({ messege: "Error", error }, { status: 500 });
+  } finally {
+    await prisma.$disconnect();
+  }
+};

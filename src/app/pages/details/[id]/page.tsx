@@ -102,7 +102,7 @@ export default function CommentDetail({ params }: { params: Promise<{ id : numbe
             </li>
           ))}
         </ul>
-        {session ? <CommentButton /> : <p></p>}
+        {session ? <CommentButton id={id}/> : <p></p>}
       </div>
     </>
   );

@@ -11,8 +11,8 @@ import { Card, CardContent,CardFooter, CardHeader, CardTitle } from "@/component
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { MdStar } from 'react-icons/md';
 
-export default function Subject1() {
-  const [subjects1, setSubjects1] = useState([]);
+export default function Subject3() {
+  const [subjects3, setSubjects3] = useState([]);
 
   useEffect(() => {
     const getSubjects = async () => {
@@ -21,16 +21,16 @@ export default function Subject1() {
         cache: "no-store"
       });
       const data = await res.json();
-      setSubjects1(data.subjects);
+      setSubjects3(data.subjects);
     };
     getSubjects();
   }, []);
 
   return (
     <>
-      {subjects1.map(( subject: NewSubject ) => (
+      {subjects3.map(( subject: NewSubject ) => (
         <div key={subject.id}>
-          {subject.type === 1 && (
+          {subject.type === 3 && (
             <Card >
               <CardHeader>
                 <div className='flex justify-between items-center pb-3'>

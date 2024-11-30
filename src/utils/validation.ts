@@ -16,6 +16,6 @@ export const signInSchema = z.object({
 
 export const commentSchema = z.object({
   stars: z.number(),
-  title: z.string().min(1, "タイトルは必須です。").max(30, "タイトルは30文字以内で入力してください。"),
+  title: z.string().min(1, "タイトルは必須です。").max(20, "タイトルは20文字以内で入力してください。"),
   content: z.string().min(1, "詳細内容は必須です。").max(200, "詳細内容は200文字以内で入力してください")
 });

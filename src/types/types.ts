@@ -30,3 +30,15 @@ export interface CommentPost {
   title:   string;
   content: string;
 };
+
+export interface NewSubject {
+  id:       number;
+  name:     string;
+  teacher:  string;
+  type:     number;
+  span:     number;
+  evaluate: number;
+  stars:    number;
+  other:    string;
+  requ:     number;
+};

@@ -13,6 +13,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// prismaのスキーマを変更するたびに、以下を実行
+// ➀ npx prisma migrate dev --name (適当な名前) 
+// ➁ npx prisma generate
+
 model User {
   id        Int       @id @default(autoincrement())
   // 認証システムで使用するid
@@ -48,6 +52,9 @@ model Subject {
   name     String
   teacher  String
   type     Int
-  span     String
+  stars    Int
+  span     Int
   evaluate Int
+  other    String
+  requ     Int
 }
