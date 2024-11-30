@@ -2,7 +2,7 @@ import prisma from "@/lib/prismaClient";
 
 import { NextResponse } from "next/server";
 
-export const GET = async ( req: Request ) => {
+export const GET = async () => {
   try {
     const subjects = await prisma.subject.findMany();
     return NextResponse.json({ message: "Success", subjects }, { status: 200 });

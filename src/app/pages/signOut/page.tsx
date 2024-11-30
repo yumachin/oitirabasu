@@ -39,7 +39,7 @@ export default function SignOut() {
       setLoading(false);
     }
     getEmail();
-  }, [session]);
+  }, [session, email]);
 
   // ニックネームを更新する関数
   const sendName = async ( name: string | undefined ) => {
