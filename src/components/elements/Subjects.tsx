@@ -1,5 +1,5 @@
 import Space from "../Space";
-import Subject1 from "./Subject";
+import Subject1 from "./Subject1";
 import Subject2 from "./Subject2";
 import Subject3 from "./Subject3";
 
