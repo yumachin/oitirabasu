@@ -16,7 +16,7 @@ export default function CommentDetail({ params }: { params: Promise<{ id : numbe
   const [session, setSession] = useState<Session | null>(null);
   const [comments, setComments] = useState([]);
   const { id } = use(params);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // 初回レンダリング時にセッション情報を更新
@@ -36,7 +36,6 @@ export default function CommentDetail({ params }: { params: Promise<{ id : numbe
   }, []);
   
   useEffect(() => {
-    setLoading(true);
     const getDetailComments = async ( id: number ) => {
       const API_URL = process.env.NEXT_PUBLIC_API_URL;
       const res = await fetch(`${API_URL}/api/comment/${id}`, {
@@ -62,7 +61,7 @@ export default function CommentDetail({ params }: { params: Promise<{ id : numbe
       )}
       <Header />
       <Space />
-      <div className="max-w-4xl mx-auto py-4 ">
+      <div className="max-w-4xl mx-auto py-4">
         {comments.length === 0 ? (
           <div className='flex justify-center items-center'>
             <p className='font-bold'>コメントはまだありません</p>
@@ -72,7 +71,7 @@ export default function CommentDetail({ params }: { params: Promise<{ id : numbe
             <p className='mb-4'>ヒットしました</p>
           </div> )
         }
-        <ul className="space-y-10">
+        <ul className="space-y-7">
           {comments.map(( comment: Comment ) => (
             <li key={comment.id} className="bg-white p-5 rounded-lg">
               <div className='flex justify-between'>

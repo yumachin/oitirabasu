@@ -20,19 +20,19 @@ export default function SignOut() {
   const signOut = useSignOut();
   const { session } = useUser();
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [name, setName] = useState<string>("");
   // user: Userテーブル
   const email = session?.user.email;
 
   // ニックネームを取得する関数
   useEffect(() => {
-    setLoading(true);
     const getEmail = async () => {
       // 取得したemailとUserテーブルのemailが一致する行のnameを取得
       // data = [{name: 'ゆうま'}]
       const { data } = await supabase.from('User').select('name').eq('email', email); 
       // data/sessionがnullの可能性があるため
+      console.log("dataは", data);
       if ( data && session ) {
         setName(data[0].name);
       }

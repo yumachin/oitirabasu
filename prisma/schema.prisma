@@ -42,3 +42,12 @@ model Comment {
   // 投稿する時に、ログイン情報からUserモデルのidを代入
   authorId  Int?
 }
+
+model Subject {
+  id       Int    @id @default(autoincrement())
+  name     String
+  teacher  String
+  type     Int
+  span     String
+  evaluate Int
+}
