@@ -51,7 +51,7 @@ export default function PastComments() {
   const handleDelete = async ( id: number )  => {
     setLoading(true);
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
-    const res = await fetch(`${API_URL}/api/comment/${id}`, {
+    await fetch(`${API_URL}/api/comment/${id}`, {
       method: 'DELETE'
     });
     setPastComments(( prevPastComments ) => prevPastComments.filter(( pastComment: Comment ) => pastComment.id !== id ));

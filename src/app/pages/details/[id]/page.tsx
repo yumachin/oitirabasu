@@ -46,7 +46,7 @@ export default function CommentDetail({ params }: { params: Promise<{ id : numbe
       setLoading(false);
     }
     getDetailComments(id);
-  }, [])
+  }, [id])
 
   return (
     <>
