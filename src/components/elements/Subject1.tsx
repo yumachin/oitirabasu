@@ -17,6 +17,7 @@ export default function Subject1() {
   useEffect(() => {
     const getSubjects = async () => {
       const API_URL = process.env.NEXT_PUBLIC_API_URL;
+      console.log("API_URLは", API_URL);
       const res = await fetch(`${API_URL}/api/register`, {
         cache: "no-store"
       });
