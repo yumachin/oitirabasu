@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 // npx shadcn@latest init
 // npx shadcn@latest add Card
 import { Card, CardContent,CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+// npm i react-icons
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { MdStar } from 'react-icons/md';
 

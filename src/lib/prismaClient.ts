@@ -1,8 +1,8 @@
-// npm i prisma
+// npm i prisma @prisma/client
 // npx prisma init
-// npm i @prisma/client
 
-// コピペ
+// prismaドキュメントからコピペ
+// package.jsonのbuildに[prisma generate &&]を書く
 import { PrismaClient } from '@prisma/client';
 
 const prismaClientSingleton = () => {

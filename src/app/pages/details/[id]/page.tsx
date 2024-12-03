@@ -9,7 +9,9 @@ import { Comment } from '@/types/types';
 import { use, useEffect, useState } from 'react';
 import { Session } from '@supabase/supabase-js';
 
+// npm i lucide-react
 import { CircleUser } from 'lucide-react';
+// npm i react-icon
 import { MdStar } from 'react-icons/md';
 
 export default function CommentDetail({ params }: { params: Promise<{ id : number }> }) {
@@ -19,13 +21,12 @@ export default function CommentDetail({ params }: { params: Promise<{ id : numbe
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 初回レンダリング時にセッション情報を更新
     // supabase.auth.getSession(): セッション情報を取得
     // dataプロパティの中のsessionプロパティを分割代入で直接取得
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
     });
-    // 認証状態の変更時にセッション情報を更新(hooks/useUser.tsと同じ挙動)
+    // hooks/useUser.tsと同じ挙動
     const { data } = supabase.auth.onAuthStateChange(( _, session ) => {
         setSession(session);
       }
@@ -82,7 +83,7 @@ export default function CommentDetail({ params }: { params: Promise<{ id : numbe
                   <div>
                     <h3 className="font-semibold">{comment.author.name}</h3>
                     <p className="text-sm text-gray-600">
-                      {comment.updatedAt === null ? new Date( comment.createdAt ).toDateString() : new Date( comment.updatedAt ).toDateString()}
+                      {comment.updatedAt === null ? new Date(comment.createdAt).toDateString() : new Date(comment.updatedAt).toDateString()}
                     </p>
                   </div>
                 </div>

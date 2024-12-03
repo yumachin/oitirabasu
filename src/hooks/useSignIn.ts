@@ -1,38 +1,29 @@
 "use client";
 
 import { supabase } from "@/lib/supabaseClient";
-import { SignProps } from "@/types/types";
+import { SignInProps } from "@/types/types";
 
-// keyof: 存在しないプロパティ名が指定されるのを防ぐ
-export const useSignIn = ( setError: ( field: keyof SignProps, error: { type: string; message: string } ) => void ) => {
-  const signIn = async ({ email, password }: SignProps) => {
+// keyof: fieldにはSignPropsのプロパティのみ渡されるようにする
+export default function useSignIn( setError: (field: keyof SignInProps, error: { type: string, message: string }) => void ) {
+  const signIn = async ({ email, password }: SignInProps) => {
     try {
-      // まずemailのエラーをcheck
-      const { error: emailError } = await supabase
-        // UserDBを参照
-        .from('User')
-        // email列を参照
-        .select('email')
-        // email列の中で引数emailと一致するものがあるかどうか
-        .eq('email', email)
-        // 返されるレコードが1件のみであることを期待
-        .single();
-      if (emailError) {
+      const { error: emailError } = await supabase.from('User').select('email').eq('email', email);
+      if ( emailError ) {
         // 第１引数に、エラーを表示させたいフォームフィールドの名前指定
-        // type: "manual": 手動で設定したエラーとして扱う
+        // [type: "manual"]: 手動で設定したエラーとして扱う
         setError("email", { type: "manual", message: "存在しないメールアドレスです。" });
+        // この時点でsignInは終了し、signInにはnullが返される
         return null;
       }
-
-      // 次にpasswordをcheck
       const { error: passwordError } = await supabase.auth.signInWithPassword({ email, password });
-      if (passwordError) {
+      if ( passwordError ) {
         setError("password", { type: "manual", message: "パスワードが間違っています。" });
-        return null;
+        return null
       }
+      // signInには{ error: null }が返される
       return { error: null };
-  
-    } catch ( error ) {
+    }
+    catch ( error ) {
       console.error("エラー発生:", error);
       return null;
     }

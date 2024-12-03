@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import Header from '@/components/Header';
-import { useSignOut } from '@/hooks/useSignOut';
-import { useUser } from '@/hooks/useUser';
+import useSignOut from '@/hooks/useSignOut';
+import useUser from '@/hooks/useUser';
 import { supabase } from '@/lib/supabaseClient';
 
 import { useRouter } from 'next/navigation';
@@ -10,10 +10,13 @@ import { useEffect, useState } from 'react';
 // npm i react-hot-toast
 import toast, { Toaster } from 'react-hot-toast';
 
+// npx shadcn@latest init
+// npx shadcn@latest add button
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+// npm i lucide-react
 import { LogOut } from 'lucide-react';
 
 export default function SignOut() {
@@ -32,14 +35,13 @@ export default function SignOut() {
       // data = [{name: 'ゆうま'}]
       const { data } = await supabase.from('User').select('name').eq('email', email); 
       // data/sessionがnullの可能性があるため
-      console.log("dataは", data);
       if ( data && session ) {
         setName(data[0].name);
       }
       setLoading(false);
     }
     getEmail();
-  }, [session, email]);
+  }, [email]);
 
   // ニックネームを更新する関数
   const sendName = async ( name: string | undefined ) => {
@@ -88,15 +90,13 @@ export default function SignOut() {
       <Toaster />
       <Header />
       <div className="min-h-screen flex items-center justify-center p-4">
-        <Card className="w-full max-w-2xl bg-white">
-          <CardHeader className="space-y-1">
-            <div className="flex items-center space-x-4">
-              <CardTitle className="text-2xl font-bold text-slate-800">
-                設定
-              </CardTitle>
-            </div>
+        <Card className="w-full max-w-xl bg-white space-y-3">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-slate-800">
+              設定
+            </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent>
             <div className="space-y-2">
               <Label htmlFor="name">ニックネーム</Label>
               <Input 
@@ -120,8 +120,7 @@ export default function SignOut() {
               className="text-red-600 hover:bg-red-50 transition duration-200 ease-in-out" 
               onClick={handleLogOut}
             >
-              <LogOut className="w-4 h-4 mr-2" />
-              SignOut
+              <LogOut className="w-4 h-4 mr-2" />SignOut
             </Button>
           </CardFooter>
         </Card>

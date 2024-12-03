@@ -13,6 +13,7 @@ export const GET = async () => {
   }
 };
 
+// 講義科目の追加
 export const POST = async ( req: Request ) => {
   try {
     const { name, teacher, type, span, evaluate, stars, other, requ } = await req.json();

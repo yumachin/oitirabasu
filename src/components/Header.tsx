@@ -7,24 +7,24 @@ import Setting from './elements/Setting';
 import { supabase } from '@/lib/supabaseClient';
 
 import { useEffect, useState } from 'react';
-// セッション状態を知るための型定義
+// Supabaseのセッション情報を表す型
 import { Session } from '@supabase/supabase-js';
 
 // npm i lucide-react
 import { Menu } from 'lucide-react';
 
 export default function Header() {
-  // 認証状態か否か
+  // Loginしてる時  : Sessionオブジェクト
+  // Loginしてない時: null
   const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
-    // 初回レンダリング時にセッション情報を更新
     // supabase.auth.getSession(): セッション情報を取得
     // dataプロパティの中のsessionプロパティを分割代入で直接取得
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
     });
-    // 認証状態の変更時にセッション情報を更新(hooks/useUser.tsと同じ挙動)
+    // hooks/useUser.tsと同じ挙動
     const { data } = supabase.auth.onAuthStateChange(( _, session ) => {
         setSession(session);
       }
@@ -39,6 +39,7 @@ export default function Header() {
       <div className="flex justify-between items-center h-16 px-6 sm:px-8 lg:px-16 ">
         <div className="flex items-center">
           <Menu className='mr-6 lg:hidden'/>
+          {/* tracking-tighter: 文字間隔を狭く */}
           <span className="text-2xl font-bold tracking-tighter mr-16">
             OITirabasu
           </span>

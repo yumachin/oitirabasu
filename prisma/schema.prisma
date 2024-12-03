@@ -16,45 +16,41 @@ datasource db {
 // prismaのスキーマを変更するたびに、以下を実行
 // ➀ npx prisma migrate dev --name (適当な名前) 
 // ➁ npx prisma generate
-
 model User {
-  id        Int       @id @default(autoincrement())
+  id       Int        @id @default(autoincrement())
   // 認証システムで使用するid
-  auth_id   String    @unique
-  email     String    @unique
-  // session情報がnullにならないためのオプショナルチェーン
-  name      String?
-  posts     Comment[]
+  auth_id  String     @unique
+  email    String     @unique
+  name     String
+  posts    Comment[]
 }
 
 model Comment {
-  id        Int      @id @default(autoincrement())
-  db_id     Int
-  createdAt DateTime @default(now())
+  id         Int        @id @default(autoincrement())
+  db_id      Int
+  createdAt  DateTime   @default(now())
   // @updatedAt: 自動的に最新の更新日時を設定
-  updatedAt DateTime? @updatedAt
-  stars     Int
-  title     String
-  content   String
+  updatedAt  DateTime?  @updatedAt
+  stars      Int
+  title      String
+  content    String
   // author: User { id: 1, email: "yuma@yuma.com", name: "中井裕麻", post: [] } が格納
-  // @relation: 他テーブルとのリレーションを設定
   // fields:　リレーションの外部キーを指定
-  // references: [id]： Userモデルのidフィールドを参照
-  // CommentのauthorId = Userモデルのidの時、そのUserが投稿のauthorであると判断
-  // ユーザーが削除された時を考慮して？を付与
-  author    User?    @relation(fields: [authorId], references: [id])
+  // references: [id]： Userのidフィールドを参照
+  // (CommentのauthorId = Userのid)の時、そのUserが投稿のauthorであると判断
+  author     User        @relation(fields: [authorId], references: [id])
   // 投稿する時に、ログイン情報からUserモデルのidを代入
-  authorId  Int?
+  authorId   Int
 }
 
 model Subject {
-  id       Int    @id @default(autoincrement())
-  name     String
-  teacher  String
-  type     Int
-  stars    Int
-  span     Int
-  evaluate Int
-  other    String
-  requ     Int
+  id        Int     @id @default(autoincrement())
+  name      String
+  teacher   String
+  type      Int
+  stars     Int
+  span      Int
+  evaluate  Int
+  other     String
+  requ      Int
 }

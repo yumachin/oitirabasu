@@ -1,8 +1,8 @@
 "use client";
 
 import Header from "@/components/Header";
-import { useSignUp } from "@/hooks/useSignUp";
-import { SignProps } from "@/types/types";
+import useSignUp from "@/hooks/useSignUp";
+import { SignUpProps } from "@/types/types";
 import { signUpSchema } from "@/utils/validation";
 
 import { ReactNode, useState } from "react";
@@ -16,20 +16,19 @@ import { SubmitHandler, useForm } from "react-hook-form";
 // npm i react-hot-toast
 import toast from "react-hot-toast";
 
+// npx shadcn@latest init
+// npx shadcn@latest add button
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+// npm i lucide-react
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 export default function SignUp() {
-  const { register, handleSubmit, formState: { errors } } = useForm<SignProps>({
+  const { register, handleSubmit, formState: { errors } } = useForm<SignUpProps>({
     // 初期値を指定(下で定義したhandleSignUpには引数が必要　=> name, email, passwordプロパティをstring型で指定しているに初期値がないとnull型になる)
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-    },
+    defaultValues: { name: "", email: "", password: "" },
     mode: 'onChange',
     resolver: zodResolver(signUpSchema)
   });
@@ -39,9 +38,9 @@ export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
 
   // SubmitHandler: react-hook-formを使っている時利用される型
-  // SignProps: SubmitHandlerがどんなデータを受け取るかを型指定
+  // SignUpProps: SubmitHandlerがどんなデータを受け取るかを型指定
   // formData: フォームから送られてきたオブジェクト
-  const handleSignUp: SubmitHandler<SignProps> = async ( formData ) => {
+  const handleSignUp: SubmitHandler<SignUpProps> = async ( formData ) => {
     toast.loading("Loading...", {id: '1'});
     await signUp({ name: formData.name, email: formData.email, password: formData.password });
     toast.success("Success!", {id: '1'});
@@ -52,14 +51,14 @@ export default function SignUp() {
   return (
     <>
       <Header />
-      <div className="flex justify-center items-center flex-col h-screen">
+      <div className="flex flex-col justify-center items-center min-h-screen">
         <Card className="w-full max-w-md bg-white">
           <CardHeader className="space-y-1 mb-4">
             <CardTitle className="text-2xl font-bold text-center text-slate-800 mb-2">SignUp</CardTitle>
             <CardDescription className="text-center text-slate-600">ニックネーム、メールアドレス、パスワードを登録してください</CardDescription>
           </CardHeader>
-          <form onSubmit={handleSubmit(handleSignUp)}>
-            <CardContent className="space-y-3 mb-6">
+          <form onSubmit={handleSubmit( handleSignUp )}>
+            <CardContent className="space-y-6 mb-6">
               <div className="space-y-2">
                 <Label htmlFor="name">ニックネーム</Label>
                 <Input 
@@ -94,7 +93,7 @@ export default function SignUp() {
                   <button 
                     type="button"
                     onClick={() => setShowPassword(!showPassword)} 
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600"
+                    className="absolute inset-y-0 right-0 pr-5 flex items-center text-slate-400 hover:text-slate-600"
                   >
                     {showPassword ? (
                       <EyeOffIcon className="h-5 w-5" />

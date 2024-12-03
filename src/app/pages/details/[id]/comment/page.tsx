@@ -1,13 +1,13 @@
 "use client";
 
 import Header from "@/components/Header";
-import { useUser } from "@/hooks/useUser";
+import useUser from "@/hooks/useUser";
 import { CommentPost } from "@/types/types";
 import { commentSchema } from "@/utils/validation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { ReactNode, use, useState } from "react";
+import { ReactNode, use, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -37,6 +37,17 @@ export default function Comment({ params }: { params: Promise<{ id : number }> }
   const { id } = use(params);
   const { user } = useUser();
   const authorId = user?.id;
+  const [subjectName, setSubjectName] = useState<string>("");
+  const [loading, setLoading] = useState(true);
+
+  const getSubjectName = async () => {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+    const res = await fetch(`${API_URL}/api/subject/${id}`, {
+      cache: "no-store"
+    });
+    const data = await res.json();
+    return data.subject.name;
+  };
 
   const { register, setValue, handleSubmit, formState: { errors } } = useForm<CommentPost>({
     defaultValues: { stars: 0, title: "", content: "" },
@@ -52,14 +63,32 @@ export default function Comment({ params }: { params: Promise<{ id : number }> }
     router.refresh();
   };
 
+  useEffect(() => {
+    const fetchSubjectName = async () => {
+      const tepSubjectName = await getSubjectName();
+      setSubjectName(tepSubjectName);
+    };
+    fetchSubjectName();
+    setLoading(false);
+  }, []);
+
   return (
     <>
+      {loading ? (
+        <div className="flex justify-center items-center min-h-screen">
+          {/* animate-spin: 回転アニメーション適用 */}
+          {/* border-t-transparent: 円を上部を欠けさせる */}
+          <div className="h-24 w-24 border-4 border-indigo-400 rounded-full animate-spin border-t-transparent"></div>
+        </div>
+      ) : (
+        <></>
+      )}
       <Toaster />
       <Header />
       <div className="flex justify-center items-center flex-col h-screen">
         <Card className="w-full max-w-md bg-white">
           <CardHeader className="space-y-1 mb-4">
-            <CardTitle className="text-2xl font-bold text-center text-slate-800 mb-2">Comment</CardTitle>
+            <CardTitle className="text-2xl font-bold text-center text-slate-800 mb-2">{subjectName}</CardTitle>
             <CardDescription className="text-center text-slate-600">コメントを入力してください</CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit(handlePost)}>

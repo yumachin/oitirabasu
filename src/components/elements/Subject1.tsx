@@ -8,27 +8,37 @@ import { useEffect, useState } from 'react';
 // npx shadcn@latest init
 // npx shadcn@latest add Card
 import { Card, CardContent,CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+// npm i react-icons
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { MdStar } from 'react-icons/md';
 
 export default function Subject1() {
   const [subjects1, setSubjects1] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getSubjects = async () => {
+    const getSubject = async () => {
       const API_URL = process.env.NEXT_PUBLIC_API_URL;
-      console.log("API_URLは", API_URL);
       const res = await fetch(`${API_URL}/api/register`, {
         cache: "no-store"
       });
       const data = await res.json();
       setSubjects1(data.subjects);
+      setLoading(false);
     };
-    getSubjects();
+    getSubject();
   }, []);
 
   return (
     <>
+      {loading && 
+      // inset-0: top, bottom, left, rightを0に
+      <div className="fixed inset-0 flex justify-center items-center bg-gray-200 z-100">
+        {/* animate-spin: 回転アニメーション適用 */}
+        {/* border-t-transparent: 円を上部を欠けさせる */}
+        <div className="h-24 w-24 border-4 border-indigo-400 rounded-full animate-spin border-t-transparent"></div>
+      </div> 
+      }
       {subjects1.map(( subject: NewSubject ) => (
         <div key={subject.id}>
           {subject.type === 1 && (

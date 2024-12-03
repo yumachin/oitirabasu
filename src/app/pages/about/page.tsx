@@ -5,10 +5,14 @@ import { aboutDetails } from '@/utils/datas';
 
 import { useRouter } from 'next/navigation';
 
+// npx shadcn@latest init
+// npx shadcn@latest button
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from "@/components/ui/card";
+// npm i lucide-react 
 import { ChevronRight } from 'lucide-react';
 // アニメーションを追加するライブラリ
+// npm i framer-motion
 import { motion } from 'framer-motion';
 
 export default function About() {
@@ -47,15 +51,15 @@ export default function About() {
           <div>
             <motion.div 
               className="grid gap-10 sm:grid-cols-3"
-              variants={{
-                animate: { transition: { staggerChildren: 0.15 } }
-              }}
+              // staggerChildren: 子要素が順番にアニメーションを実行する際の遅延時間を設定
+              variants={{animate: { transition: { staggerChildren: 0.15 } }}}
+              // "initial": const animationで定義したもの
               initial="initial"
               animate="animate"
             >
               {aboutDetails.map((item, index) => (
                 <motion.div key={index} variants={animation}>
-                  <Card className="h-full hover:shadow-xl transition-shadow duration-300">
+                  <Card className="h-full hover:shadow-xl transition duration-300">
                     <CardContent className="p-6 flex flex-col items-center text-center">
                       <item.icon className="h-12 w-12 text-slate-400" />
                       <h2 className="text-2xl font-bold text-gray-900 mb-5">{item.title}</h2>
@@ -73,7 +77,7 @@ export default function About() {
           </div>
           <motion.div className="mt-16 sm:mt-24 mb-6 text-center" {...animation}>
             <Button 
-              className="items-center px-10 py-6 text-base rounded-md text-white bg-slate-700 hover:bg-slate-800"
+              className="items-center px-10 py-6 rounded-md text-white bg-slate-700 hover:bg-slate-800"
               onClick={() => router.push("/pages/signUp")}
             >
               新規アカウント登録

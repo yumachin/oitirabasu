@@ -1,8 +1,8 @@
 "use client";
 
 import Header from "@/components/Header";
-import { useSignIn } from "@/hooks/useSignIn";
-import { SignProps } from "@/types/types";
+import useSignIn from "@/hooks/useSignIn";
+import { SignInProps } from "@/types/types";
 import { signInSchema } from "@/utils/validation";
 
 import { ReactNode, useState } from "react";
@@ -16,15 +16,19 @@ import { SubmitHandler, useForm } from "react-hook-form";
 // npm i react-hot-toast
 import toast, { Toaster } from "react-hot-toast";
 
+// npx shadcn@latest init
+// npx shadcn@latest add button
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+// npm i lucide-react
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 export default function SignIn() {
+  // setError: パスワードの正誤を判定するためのバリデーションをセットする役割
   // SignProps: useFormに渡すデータの型
-  const { register, handleSubmit, formState: { errors }, setError } = useForm<SignProps>({
+  const { register, handleSubmit, formState: { errors }, setError } = useForm<SignInProps>({
     defaultValues: { email: "", password: "" },
     mode: 'onChange',
     resolver: zodResolver(signInSchema)
@@ -35,9 +39,9 @@ export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
 
   // SubmitHandler: react-hook-formを使っている時利用される型
-  // SignProps: SubmitHandlerがどんなデータを受け取るかを型指定
+  // SignInProps: SubmitHandlerがどんなデータを受け取るかを型指定
   // formData: フォームから送られてきたオブジェクト
-  const handleLogin: SubmitHandler<SignProps> = async ( formData ) => {
+  const handleLogin: SubmitHandler<SignInProps> = async ( formData ) => {
     toast.loading("Loading...", {id: '1'});
     await signIn({ email: formData.email, password: formData.password });
     toast.success("Success!", {id: '1'});
@@ -56,7 +60,7 @@ export default function SignIn() {
             <CardDescription className="text-center text-slate-600">メールアドレスとパスワードを入力してください</CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit(handleLogin)}>
-            <CardContent className="space-y-6 mb-6">
+            <CardContent className="space-y-12 mb-6">
               <div className="space-y-2">
                 <Label htmlFor="email">メールアドレス</Label>
                 <Input 
@@ -73,7 +77,6 @@ export default function SignIn() {
                 <div className="relative">
                   <Input 
                     id="password"
-                    placeholder="password"
                     type={showPassword ? "text" : "password"}
                     {...register("password")} 
                     className="pr-10 transition duration-200 ease-in-out focus:ring-2 focus:ring-slate-500"

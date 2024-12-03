@@ -19,18 +19,6 @@ export interface Comment {
   authorId:  number;
 };
 
-export interface SignProps {
-  name?:    string;
-  email:    string;
-  password: string;
-};
-
-export interface CommentPost {
-  stars:    number;
-  title:   string;
-  content: string;
-};
-
 export interface NewSubject {
   id:       number;
   name:     string;
@@ -41,4 +29,22 @@ export interface NewSubject {
   stars:    number;
   other:    string;
   requ:     number;
+};
+
+
+export interface SignUpProps {
+  name:     string;
+  email:    string;
+  password: string;
+};
+
+export interface SignInProps {
+  email:    string;
+  password: string;
+};
+
+export interface CommentPost {
+  stars:    number;
+  title:   string;
+  content: string;
 };

@@ -2,13 +2,16 @@
 
 import Header from '@/components/Header';
 import Space from '@/components/Space';
-import { Button } from '@/components/ui/button';
-import { useUser } from '@/hooks/useUser';
+import useUser from '@/hooks/useUser';
 import { supabase } from '@/lib/supabaseClient';
 import { Comment } from '@/types/types';
 
 import { useEffect, useState } from 'react';
 
+// npx shadch@latest init
+// npx shadch@latest add button
+import { Button } from '@/components/ui/button';
+// npm i lucide-react
 import { MdStar } from 'react-icons/md';
 
 export default function PastComments() {
@@ -30,10 +33,9 @@ export default function PastComments() {
       }
     };
     getAuthorId();
-  }, [session]);
+  }, [email]);
 
   useEffect(() => {
-    // pastCommentsの上書きを防ぐ
     if (authorId === undefined) return; 
 
     const getPastComments = async ( authorId: number ) => {
@@ -43,9 +45,10 @@ export default function PastComments() {
       });
       const data = await res.json();
       setPastComments(data.pastComments);
+      console.log("過去の投稿は", data.pastComments);
       setLoading(false);
     };
-    getPastComments(authorId!);
+    getPastComments(authorId);
   }, [authorId]);
 
   const handleDelete = async ( id: number )  => {
@@ -86,7 +89,7 @@ export default function PastComments() {
                         }
                       </p>
                       <p className="text-xl text-gray-400 mr-4">/</p>
-                      <p className="text-sm text-gray-600">線形代数学Ⅰ</p>
+                      <p className="text-sm text-gray-600">{pastComment.db_id}</p>
                     </div>
                     <div className="flex items-start">
                       <div className="flex">
