@@ -74,84 +74,85 @@ export default function Comment({ params }: { params: Promise<{ id : number }> }
 
   return (
     <>
+      <Toaster />
+      <Header />
       {loading ? (
         <div className="flex justify-center items-center min-h-screen">
           {/* animate-spin: 回転アニメーション適用 */}
           {/* border-t-transparent: 円を上部を欠けさせる */}
           <div className="h-24 w-24 border-4 border-indigo-400 rounded-full animate-spin border-t-transparent"></div>
         </div>
-      ) : (
-        <></>
-      )}
-      <Toaster />
-      <Header />
-      <div className="flex justify-center items-center flex-col h-screen">
-        <Card className="w-full max-w-md bg-white">
-          <CardHeader className="space-y-1 mb-4">
-            <CardTitle className="text-2xl font-bold text-center text-slate-800 mb-2">{subjectName}</CardTitle>
-            <CardDescription className="text-center text-slate-600">コメントを入力してください</CardDescription>
-          </CardHeader>
-          <form onSubmit={handleSubmit(handlePost)}>
-            <CardContent className="space-y-8 mb-6">
-              {/* 星での評価 */}
-              <div className="flex flex-col justify-center space-x-2 space-y-2">
-                <Label>評価</Label>
-                <div className="flex">
-                  {stars.map(( star ) => (
-                    <button
-                      key={star}
-                      type="button"
-                      onClick={() => {
-                        const newCount = count === star ? star - 1 : star;
-                        setCount(newCount);
-                        setValue("stars", newCount);
-                      }}
-                      className="focus:outline-none"
-                    >
-                      <MdStar className={`w-8 h-8 ${ star <= count ? "text-yellow-400" : "text-gray-300" }`} />
-                    </button>
-                  ))}
+      ) : ( subjectName && (
+        <div className="flex justify-center items-center flex-col h-screen">
+          <Card className="w-full max-w-md bg-white">
+            <CardHeader className="space-y-1 mb-4">
+              <CardTitle className="text-2xl font-bold text-center text-slate-800 mb-2">{subjectName}</CardTitle>
+              <CardDescription className="text-center text-slate-600">コメントを入力してください</CardDescription>
+            </CardHeader>
+            <form onSubmit={handleSubmit(handlePost)}>
+              <CardContent className="space-y-8 mb-6">
+                {/* 星での評価 */}
+                <div className="flex flex-col justify-center space-x-2 space-y-2">
+                  <Label>評価</Label>
+                  <div className="flex">
+                    {stars.map(( star ) => (
+                      <button
+                        key={star}
+                        type="button"
+                        onClick={() => {
+                          const newCount = count === star ? star - 1 : star;
+                          setCount(newCount);
+                          setValue("stars", newCount);
+                        }}
+                        className="focus:outline-none"
+                      >
+                        <MdStar className={`w-8 h-8 ${ star <= count ? "text-yellow-400" : "text-gray-300" }`} />
+                      </button>
+                    ))}
+                  </div>
+                  <input
+                    type="hidden"
+                    {...register("stars")}
+                  />
                 </div>
-                <input
-                  type="hidden"
-                  {...register("stars")}
-                />
-              </div>
-              {/* 星での評価 */}
-              {/* タイトル */}
-              <div className="space-y-2">
-                <Label htmlFor="title">タイトル</Label>
-                <Input 
-                  id="title"
-                  {...register("title")}
-                  className="transition duration-200 ease-in-out focus:ring-2 focus:ring-slate-500"
-                />
-                {/* as ReactNode: errors.title?.messageがundefinedの時用 */}
-                <p className="text-red-500 text-xs mt-1 ml-1">{errors.title?.message as ReactNode}</p>
-              </div>
-              {/* タイトル */}
-              {/* 詳細内容 */}
-              <div className="space-y-2">
-                <Label htmlFor="content">詳細内容</Label>
-                <Textarea 
-                  id="content"
-                  rows={5}
-                  {...register("content")}
-                  className="pr-10 transition duration-200 ease-in-out focus:ring-2 focus:ring-slate-500"
-                />
-                {/* as ReactNode: errors.content?.messageがundefinedの時用 */}
-                <p className="text-red-500 text-xs mt-1 ml-1">{errors.content?.message as ReactNode}</p>
-              </div>
-              {/* 詳細内容 */}
-            </CardContent>
-            <CardFooter>
-              <Button className="w-full bg-slate-700 hover:bg-slate-800 text-white transition duration-200 ease-in-out">
-                投稿
-              </Button>
-            </CardFooter>
-          </form>
-        </Card>
-      </div>
+                {/* 星での評価 */}
+                {/* タイトル */}
+                <div className="space-y-2">
+                  <Label htmlFor="title">タイトル</Label>
+                  <Input 
+                    id="title"
+                    {...register("title")}
+                    className="transition duration-200 ease-in-out focus:ring-2 focus:ring-slate-500"
+                  />
+                  {/* as ReactNode: errors.title?.messageがundefinedの時用 */}
+                  <p className="text-red-500 text-xs mt-1 ml-1">{errors.title?.message as ReactNode}</p>
+                </div>
+                {/* タイトル */}
+                {/* 詳細内容 */}
+                <div className="space-y-2">
+                  <Label htmlFor="content">詳細内容</Label>
+                  <Textarea 
+                    id="content"
+                    rows={5}
+                    {...register("content")}
+                    className="pr-10 transition duration-200 ease-in-out focus:ring-2 focus:ring-slate-500"
+                  />
+                  {/* as ReactNode: errors.content?.messageがundefinedの時用 */}
+                  <p className="text-red-500 text-xs mt-1 ml-1">{errors.content?.message as ReactNode}</p>
+                </div>
+                {/* 詳細内容 */}
+              </CardContent>
+              <CardFooter>
+                <Button className="w-full bg-slate-700 hover:bg-slate-800 text-white transition duration-200 ease-in-out">
+                  投稿
+                </Button>
+              </CardFooter>
+            </form>
+          </Card>
+        </div>
+      )
+      )}
+      
     </>
   );
 };
