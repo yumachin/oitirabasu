@@ -1,7 +1,7 @@
 import Space from "../Space";
-import Subject1 from "./Subject1";
-import Subject2 from "./Subject2";
-import Subject3 from "./Subject3";
+import EduSubjects from "./EduSubjects";
+import MathSubjects from "./MathSubjects";
+import SpecSubjects from "./SpecSubjects";
 
 export default function Subjects() {
   return (
@@ -13,21 +13,21 @@ export default function Subjects() {
       <div>
         <p className="px-7 font-bold text-lg">教養共通科目（※評価方法：　平常点(出席・課題など)、レポート点、テスト点の割合（%））</p>
         <div className='flex flex-col sm:grid sm:grid-cols-3 p-6 gap-3'>
-          <Subject1 />
+          <EduSubjects />
         </div>
         <Space />
       </div>
       <div>
         <p className="px-7 font-bold text-lg">工学関連科目（※評価方法：　平常点(出席・課題など)、レポート点、テスト点の割合（%））</p>
         <div className='flex flex-col sm:grid sm:grid-cols-3 p-6 gap-3'>
-          <Subject2 />
+          <MathSubjects />
         </div>
         <Space />
       </div>
       <div>
         <p className="px-7 font-bold text-lg">専門科目（※評価方法：　平常点(出席・課題など)、レポート点、テスト点の割合（%））</p>
         <div className="flex flex-col sm:grid sm:grid-cols-3 p-6 gap-3">
-          <Subject3 />
+          <SpecSubjects />
         </div>
       </div>
       <Space />

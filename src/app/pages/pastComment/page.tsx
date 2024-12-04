@@ -15,11 +15,13 @@ import { Button } from '@/components/ui/button';
 import { MdStar } from 'react-icons/md';
 
 export default function PastComments() {
-  const [pastComments, setPastComments] = useState([]);
+  const [pastComments, setPastComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(true);
   const [authorId, setAuthorId] = useState<number>();
   const { session } = useUser();
   const email = session?.user.email;
+  const [subjectIdArray, setSubjectIdArray] = useState<number[]>([]);
+  const [dct, setDct] = useState<{[key: number]: string}>({});
 
   // UserテーブルからauthorIdを取得する
   useEffect(() => {
@@ -45,7 +47,6 @@ export default function PastComments() {
       });
       const data = await res.json();
       setPastComments(data.pastComments);
-      console.log("過去の投稿は", data.pastComments);
       setLoading(false);
     };
     getPastComments(authorId);
@@ -60,6 +61,27 @@ export default function PastComments() {
     setPastComments(( prevPastComments ) => prevPastComments.filter(( pastComment: Comment ) => pastComment.id !== id ));
     setLoading(false);
   };
+
+  useEffect(() => {
+    const subjectIdArry = [];
+    for ( let i=0; i<pastComments.length; i++ ) {
+      subjectIdArry.push(pastComments[i].db_id);
+    }
+    setSubjectIdArray(subjectIdArry);
+  }, [pastComments]);
+
+  useEffect(() => {
+    const getSubjectRecord = async (id: number) => {
+      const { data } = await supabase.from("Subject").select("*").eq("id", id);
+      if (data) {
+        const name = data[0].name;
+        setDct(prev => ({ ...prev, [id]: name }));
+      }
+    };
+    for ( let i = 0; i < subjectIdArray.length; i++ ) {
+      getSubjectRecord(subjectIdArray[i]);
+    }
+  }, [subjectIdArray]);
 
   return (
     <div>
@@ -89,7 +111,7 @@ export default function PastComments() {
                         }
                       </p>
                       <p className="text-xl text-gray-400 mr-4">/</p>
-                      <p className="text-sm text-gray-600">{pastComment.db_id}</p>
+                      <p className="text-sm text-gray-600">{dct[pastComment.db_id] ? dct[pastComment.db_id] : "講義名X"}</p>
                     </div>
                     <div className="flex items-start">
                       <div className="flex">
