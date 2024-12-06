@@ -1,6 +1,7 @@
 "use client";
 
 import CheckPastPosts from './elements/CheckPastPosts';
+import HamburgerMenu from './elements/HambergerMenu';
 import Links from './elements/Links';
 import LoginForm from './elements/LoginForm';
 import Setting from './elements/Setting';
@@ -10,8 +11,6 @@ import { useEffect, useState } from 'react';
 // Supabaseのセッション情報を表す型
 import { Session } from '@supabase/supabase-js';
 
-// npm i lucide-react
-import { Menu } from 'lucide-react';
 
 export default function Header() {
   // Loginしてる時  : Sessionオブジェクト
@@ -38,7 +37,7 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 bg-white border-b-2 border-gray-200 w-full z-100">
       <div className="flex justify-between items-center h-16 px-6 sm:px-8 lg:px-16 ">
         <div className="flex items-center">
-          <Menu className='mr-6 lg:hidden'/>
+          <HamburgerMenu />
           {/* tracking-tighter: 文字間隔を狭く */}
           <span className="text-2xl font-bold tracking-tighter mr-16">
             OITirabasu
