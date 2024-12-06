@@ -98,42 +98,49 @@ export default function PastComments() {
             <p className='font-bold'>過去にポストしたコメントはありません。</p>
           </div> 
          ) : (
-          <div className="max-w-4xl mx-auto py-4">
-            <ul className="space-y-7">
+          <div className="max-w-xs sm:max-w-4xl mx-auto py-4">
+            <ul className="space-y-4 sm:space-y-7">
               {pastComments.map(( pastComment: Comment ) => (
-                <li key={pastComment.id} className="bg-white p-5 rounded-lg">
+                <li key={pastComment.id} className="bg-white p-4 sm:p-5 rounded-lg">
                   <div className='flex justify-between'>
                     <div className="flex items-center mb-5">
-                      <p className="text-sm text-gray-600 mr-4">
+                      <p className="text-xs sm:text-sm text-gray-600 mr-1 sm:mr-4">
                         {pastComment.updatedAt === null ? 
                           new Date( pastComment.createdAt ).toDateString() : 
                           new Date( pastComment.updatedAt ).toDateString()
                         }
                       </p>
-                      <p className="text-xl text-gray-400 mr-4">/</p>
-                      <p className="text-sm text-gray-600">{dct[pastComment.db_id] ? dct[pastComment.db_id] : "講義名X"}</p>
+                      <p className="sm:text-xl text-gray-400 mr-1 sm:mr-4">/</p>
+                      <p className="text-xs sm:text-sm text-gray-600">{dct[pastComment.db_id] ? dct[pastComment.db_id] : "講義名X"}</p>
                     </div>
                     <div className="flex items-start">
                       <div className="flex">
                       {[...Array(pastComment.stars)].map((_, index) => (
-                        <MdStar key={index} className="w-6 h-6 text-yellow-400" />
+                        <MdStar key={index} className="w-4 h-4 sm:w-6 sm:h-6 text-yellow-400" />
                       ))}
                       {[...Array(5 - pastComment.stars)].map((_, index) => (
-                        <MdStar key={index} className="w-6 h-6 text-gray-400" />
+                        <MdStar key={index} className="w-4 h-4 sm:w-6 sm:h-6 text-gray-400" />
                       ))}
                       </div>
                     </div>
                   </div>
-                  <div className='flex justify-between mb-2'>
-                    <p className="text-gray-800 font-bold text-2xl border-b border-gray-400 mb-4 px-3 pb-1">{pastComment.title}</p>
-                    <Button 
-                      className='text-xs px-8 bg-red-600 hover:bg-red-500 text-white transition duration-200 ease-in-out'
-                      onClick={() => handleDelete(pastComment.id)}
-                    >
-                      削除
-                    </Button>
+                  <div className='flex justify-between items-baseline mb-1 sm:mb-2'>
+                    <p className="text-gray-800 font-bold text-md sm:text-2xl border-b border-gray-400 mb-2 sm:mb-4 px-1 sm:px-3 pb-1">{pastComment.title}</p>
+                    <div className='flex gap-6 sm:gap-10'>
+                      <button 
+                        className='text-xs sm:text-lg font-bold text-green-600'
+                      >
+                        編集
+                      </button>
+                      <button 
+                        className='text-xs sm:text-lg font-bold text-red-500 '
+                        onClick={() => handleDelete(pastComment.id)}
+                      >
+                        削除
+                      </button>
+                    </div>
                   </div>
-                  <p className="text-gray-800 text-lg px-6">{pastComment.content}</p>
+                  <p className="text-gray-800 text-sm sm:text-lg pl-2 sm:pl-6">{pastComment.content}</p>
                 </li>
               ))}
             </ul>

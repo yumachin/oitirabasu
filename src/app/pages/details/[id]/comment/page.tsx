@@ -83,16 +83,16 @@ export default function Comment({ params }: { params: Promise<{ id : number }> }
           <div className="h-24 w-24 border-4 border-indigo-400 rounded-full animate-spin border-t-transparent"></div>
         </div>
       ) : ( subjectName && (
-        <div className="flex justify-center items-center flex-col h-screen">
-          <Card className="w-full max-w-md bg-white">
+        <div className="flex justify-center items-center flex-col min-h-screen p-4">
+          <Card className="w-full max-w-sm bg-white">
             <CardHeader className="space-y-1 mb-4">
-              <CardTitle className="text-2xl font-bold text-center text-slate-800 mb-2">{subjectName}</CardTitle>
-              <CardDescription className="text-center text-slate-600">コメントを入力してください</CardDescription>
+              <CardTitle className="text-2xl font-bold text-center text-slate-800 sm:mb-2">{subjectName}</CardTitle>
+              <CardDescription className="text-center text-slate-600 test-xs">コメントを入力してください</CardDescription>
             </CardHeader>
             <form onSubmit={handleSubmit(handlePost)}>
-              <CardContent className="space-y-8 mb-6">
+              <CardContent className="space-y-6 sm:space-y-8 sm:mb-6">
                 {/* 星での評価 */}
-                <div className="flex flex-col justify-center space-x-2 space-y-2">
+                <div className="flex flex-col justify-center space-x-2  space-y-2">
                   <Label>評価</Label>
                   <div className="flex">
                     {stars.map(( star ) => (
@@ -125,7 +125,7 @@ export default function Comment({ params }: { params: Promise<{ id : number }> }
                     className="transition duration-200 ease-in-out focus:ring-2 focus:ring-slate-500"
                   />
                   {/* as ReactNode: errors.title?.messageがundefinedの時用 */}
-                  <p className="text-red-500 text-xs mt-1 ml-1">{errors.title?.message as ReactNode}</p>
+                  <p className="text-red-500 text-xs mt-1 ml-2">{errors.title?.message as ReactNode}</p>
                 </div>
                 {/* タイトル */}
                 {/* 詳細内容 */}
@@ -135,10 +135,10 @@ export default function Comment({ params }: { params: Promise<{ id : number }> }
                     id="content"
                     rows={5}
                     {...register("content")}
-                    className="pr-10 transition duration-200 ease-in-out focus:ring-2 focus:ring-slate-500"
+                    className="pr-5 transition duration-200 ease-in-out focus:ring-2 focus:ring-slate-500"
                   />
                   {/* as ReactNode: errors.content?.messageがundefinedの時用 */}
-                  <p className="text-red-500 text-xs mt-1 ml-1">{errors.content?.message as ReactNode}</p>
+                  <p className="text-red-500 text-xs mt-1 ml-2">{errors.content?.message as ReactNode}</p>
                 </div>
                 {/* 詳細内容 */}
               </CardContent>

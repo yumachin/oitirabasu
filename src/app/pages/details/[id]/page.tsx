@@ -62,7 +62,7 @@ export default function CommentDetail({ params }: { params: Promise<{ id : numbe
       )}
       <Header />
       <Space />
-      <div className="max-w-4xl mx-auto py-4">
+      <div className="max-w-xs sm:max-w-4xl mx-auto py-4">
         {comments.length === 0 ? (
           <div className='flex justify-center items-center'>
             <p className='font-bold'>コメントはまだありません</p>
@@ -74,15 +74,15 @@ export default function CommentDetail({ params }: { params: Promise<{ id : numbe
         }
         <ul className="space-y-7">
           {comments.map(( comment: Comment ) => (
-            <li key={comment.id} className="bg-white p-5 rounded-lg">
+            <li key={comment.id} className="bg-white p-4 sm:p-5 rounded-lg">
               <div className='flex justify-between'>
-                <div className="flex items-start mb-5">
-                  <div className="mr-5">
-                    <CircleUser style={{ width: "2.5rem", height: "2.5rem" }} />
+                <div className="flex items-start   mb-5">
+                  <div className="mr-3 sm:mr-5">
+                    <CircleUser style={{ width: "2rem", height: "2rem" }} />
                   </div>
                   <div>
                     <h3 className="font-semibold">{comment.author.name}</h3>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-xs sm:text-sm text-gray-600">
                       {comment.updatedAt === null ? new Date(comment.createdAt).toDateString() : new Date(comment.updatedAt).toDateString()}
                     </p>
                   </div>
@@ -90,16 +90,16 @@ export default function CommentDetail({ params }: { params: Promise<{ id : numbe
                 <div className="flex items-start">
                   <div className="flex">
                   {[...Array(comment.stars)].map((_, index) => (
-                    <MdStar key={index} className="w-8 h-8 text-yellow-400" />
+                    <MdStar key={index} className="w-4 h-4 sm:w-7 sm:h-7 text-yellow-400" />
                   ))}
                   {[...Array(5 - comment.stars)].map((_, index) => (
-                    <MdStar key={index} className="w-8 h-8 text-gray-400" />
+                    <MdStar key={index} className="w-4 h-4 sm:w-7 sm:h-7 text-gray-400" />
                   ))}
                   </div>
                 </div>
               </div>
-              <p className="text-gray-800 font-bold text-2xl border-b border-gray-400 mb-4 pl-3 pb-1">{comment.title}</p>
-              <p className="text-gray-800 text-lg pl-6">{comment.content}</p>
+              <p className="text-gray-800 font-bold text-md sm:text-2xl border-b border-gray-400 mb-2 sm:mb-4 sm:pl-3 pb-1">{comment.title}</p>
+              <p className="text-gray-800 text-sm sm:text-lg pl-2 sm:pl-6">{comment.content}</p>
             </li>
           ))}
         </ul>
