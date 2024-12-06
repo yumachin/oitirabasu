@@ -8,9 +8,6 @@ import { Comment } from '@/types/types';
 
 import { useEffect, useState } from 'react';
 
-// npx shadch@latest init
-// npx shadch@latest add button
-import { Button } from '@/components/ui/button';
 // npm i lucide-react
 import { MdStar } from 'react-icons/md';
 

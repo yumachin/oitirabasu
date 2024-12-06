@@ -1,4 +1,3 @@
-import Space from "../Space";
 import EduSubjects from "./EduSubjects";
 import MathSubjects from "./MathSubjects";
 import SpecSubjects from "./SpecSubjects";
