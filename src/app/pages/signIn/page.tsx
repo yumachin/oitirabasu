@@ -54,7 +54,7 @@ export default function SignIn() {
       <Toaster />
       <Header />
       <div className="flex justify-center items-center flex-col h-screen">
-        <Card className="w-full max-w-md bg-white">
+        <Card className="w-full max-w-xs sm:max-w-md bg-white">
           <CardHeader className="space-y-1 mb-4">
             <CardTitle className="text-2xl font-bold text-center text-slate-800 mb-2">SignIn</CardTitle>
             <CardDescription className="text-center text-slate-600">メールアドレスとパスワードを入力してください</CardDescription>

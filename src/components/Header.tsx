@@ -7,6 +7,7 @@ import LoginForm from './elements/LoginForm';
 import Setting from './elements/Setting';
 import { supabase } from '@/lib/supabaseClient';
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 // Supabaseのセッション情報を表す型
 import { Session } from '@supabase/supabase-js';
@@ -38,10 +39,12 @@ export default function Header() {
       <div className="flex justify-between items-center h-16 px-6 sm:px-8 lg:px-16 ">
         <div className="flex items-center">
           <HamburgerMenu />
-          {/* tracking-tighter: 文字間隔を狭く */}
-          <span className="text-2xl font-bold tracking-tighter mr-16">
-            OITirabasu
-          </span>
+          <Link href={"/"}>
+            {/* tracking-tighter: 文字間隔を狭く */}
+            <span className="text-2xl font-bold tracking-tighter mr-16">
+              OITirabasu
+            </span>
+          </Link>
           <Links />
         </div>
         <div className="flex items-center sm:space-x-10">

@@ -52,10 +52,10 @@ export default function SignUp() {
     <>
       <Header />
       <div className="flex flex-col justify-center items-center min-h-screen">
-        <Card className="w-full max-w-md bg-white">
+        <Card className="w-full max-w-xs sm:max-w-md bg-white">
           <CardHeader className="space-y-1 mb-4">
             <CardTitle className="text-2xl font-bold text-center text-slate-800 mb-2">SignUp</CardTitle>
-            <CardDescription className="text-center text-slate-600">ニックネーム、メールアドレス、パスワードを登録してください</CardDescription>
+            <CardDescription className="text-center text-slate-600">以下の情報を登録してください</CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit( handleSignUp )}>
             <CardContent className="space-y-6 mb-6">
