@@ -33,11 +33,11 @@ export default function SpecSubjects() {
       {specSubjects.map(( subject: NewSubject ) => (
         <div key={subject.id}>
           <Card >
-            <CardHeader>
-              <div className='flex justify-between items-center pb-3'>
+            <CardHeader className='pb-2 sm:pb-6'>
+              <div className='flex justify-between items-center sm:pb-3'>
                 <div className='flex items-center'>
-                  {subject.requ === 2 ? <IoIosCheckmarkCircle className='text-red-500 text-2xl mr-1' /> : <></>}
-                  <CardTitle>{subject.name}</CardTitle>
+                  {subject.requ === 2 ? <IoIosCheckmarkCircle className='text-red-500 mr-1' /> : <></>}
+                  <CardTitle className='text-lg sm:text-2xl'>{subject.name}</CardTitle>
                 </div>
                 {subject.other ? 
                   <p className='font-bold text-gray-500 text-xs'>{`(⊛${subject.other})`}</p> : 
@@ -46,8 +46,8 @@ export default function SpecSubjects() {
               </div>
               <p className='flex justify-end text-gray-600 text-xs'>{subject.teacher}</p>
             </CardHeader>
-            <CardContent className='flex justify-between items-center'>
-              <div className='flex flex-col gap-2'>
+            <CardContent className='flex justify-between items-center pb-4 sm:pb-6'>
+              <div className='flex flex-col gap-1 sm:gap-2'>
                 <div className='flex'>
                   <div>おススメ度：</div>
                   <div className='flex px-3'>
@@ -80,7 +80,7 @@ export default function SpecSubjects() {
                 </div>
               </div>
             </CardContent>
-            <CardFooter className="flex justify-center">
+            <CardFooter className="flex justify-center pb-3 sm:pb-6">
               <Link href={`/pages/details/${subject.id}`} className='text-blue-600 hover:text-blue-400'>Read Comments</Link>
             </CardFooter>
           </Card>
