@@ -4,9 +4,13 @@ import Header from '@/components/Header';
 import useSignOut from '@/hooks/useSignOut';
 import useUser from '@/hooks/useUser';
 import { supabase } from '@/lib/supabaseClient';
+import { settingsSchema } from '@/utils/validation';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
+// npm i react-hook-form
+import { useForm } from 'react-hook-form';
 // npm i react-hot-toast
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -28,6 +32,13 @@ export default function SignOut() {
   // user: Userテーブル
   const email = session?.user.email;
 
+  // reset: 初期値を動的に設定
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<{name: string}>({
+    defaultValues: { name: "" },
+    mode: 'onChange',
+    resolver: zodResolver(settingsSchema)
+  });
+
   // ニックネームを取得する関数
   useEffect(() => {
     const getEmail = async () => {
@@ -37,6 +48,8 @@ export default function SignOut() {
       // data/sessionがnullの可能性があるため
       if ( data && session ) {
         setName(data[0].name);
+        // 初期値を設定
+        reset({ name: data[0].name });
       }
       setLoading(false);
     }
@@ -96,33 +109,37 @@ export default function SignOut() {
               設定
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              <Label htmlFor="name">ニックネーム</Label>
-              <Input 
-                id="name"
-                type='text'
-                value={name}
-                className="transition duration-200 ease-in-out focus:ring-2 focus:ring-slate-500"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
-              />
-            </div>
-          </CardContent>
-          <CardFooter className="flex justify-between">
-            <Button 
-              className="bg-slate-700 hover:bg-slate-800 text-white transition duration-200 ease-in-out"
-              onClick={saveName}
-            >
-              保存
-            </Button>
-            <Button 
-              variant="outline" 
-              className="text-red-600 hover:bg-red-50 transition duration-200 ease-in-out" 
-              onClick={handleLogOut}
-            >
-              <LogOut className="w-4 h-4 mr-2" />SignOut
-            </Button>
-          </CardFooter>
+          <form onSubmit={handleSubmit( saveName )}>
+            <CardContent>
+              <div className="space-y-2">
+                <Label htmlFor="name">ニックネーム</Label>
+                <Input 
+                  id="name"
+                  type='text'
+                  {...register("name", {
+                    // フォームの値変更をローカルのstateにも反映
+                    onChange: (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value),
+                  })}
+                  className="transition duration-200 ease-in-out focus:ring-2 focus:ring-slate-500"
+                />
+              </div>
+              <p className="text-red-500 text-xs mt-3 ml-1">{errors.name?.message as ReactNode}</p>
+            </CardContent>
+            <CardFooter className="flex justify-between">
+              <Button 
+                className="bg-slate-700 hover:bg-slate-800 text-white transition duration-200 ease-in-out"
+              >
+                保存
+              </Button>
+              <Button 
+                variant="outline" 
+                className="text-red-600 hover:bg-red-50 transition duration-200 ease-in-out" 
+                onClick={handleLogOut}
+              >
+                <LogOut className="w-4 h-4 mr-2" />SignOut
+              </Button>
+            </CardFooter>
+          </form>
         </Card>
       </div>
     </>
