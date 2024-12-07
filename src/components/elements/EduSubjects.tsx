@@ -61,11 +61,12 @@ export default function EduSubjects() {
                 <div className='flex'>
                   <div>おススメ度：</div>
                   <div className='flex px-3'>
-                    <MdStar className="w-6 h-6 text-yellow-400" />
-                    <MdStar className="w-6 h-6 text-yellow-400" />
-                    <MdStar className="w-6 h-6 text-yellow-400" />
-                    <MdStar className="w-6 h-6 text-yellow-400" />
-                    <MdStar className="w-6 h-6 text-yellow-400" />
+                    {[...Array(subject.stars)].map((_, index) => (
+                      <MdStar key={index} className="w-4 h-4 sm:w-7 sm:h-7 text-yellow-400" />
+                    ))}
+                    {[...Array(5 - subject.stars)].map((_, index) => (
+                      <MdStar key={index} className="w-4 h-4 sm:w-7 sm:h-7 text-gray-400" />
+                    ))}
                   </div>
                 </div>
                 <div className='flex'>
