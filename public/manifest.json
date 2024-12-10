@@ -1,0 +1,16 @@
+{
+  "name": "OITirabasu",
+  "short_name": "OITirabasu",
+  "icons": [
+    {
+      "src": "/oitirabasuLogo.png",
+      "sizes": "371x371",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#FFFFFF",
+  "background_color": "#FFFFFF",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "portrait"
+}
